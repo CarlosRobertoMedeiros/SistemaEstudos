@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+*{
+    margin: 0;
+    padding: 0;
+    border:0;
+    list-style: none;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #404C51;
+}
+
+label{
+    font-weight: bold;
+}
+
+/*Aplica a Regra de Que se for menor que min-width aplica a class container*/
+@media (min-width:1200px){
+    .container{
+        width:1170px;
+        margin:0 auto; /*Margem 0 cima e baixo esquerda e direita auto*/
+    }
+}
+
+.col-valor-header {
+    width: 120px;
+}
+.col-valor-content {
+    text-align: right;
+}
+
+.col-data-header {
+    width: 120px;
+}
+
+.col-data-content {
+    text-align: center;
+}
+
+.col-acoes{
+    width:90px;
+    text-align: center;
+}
