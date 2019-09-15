@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="ui-g">
+
+            <div class="ui-g-12">
+                <h1>Pessoas</h1>
+            </div><!--ui-g-12-->
+
+            <div class="ui-g-12 ui-fluid">
+                <label>Nome</label>
+                <input type="text" pInputText>
+            </div><!--ui-g-12 ui-fluid-->   
+
+            <div class="ui-g-12">
+                <button type="submit" pButton label="Pesquisar"></button>
+            </div><!--ui-g-12-->   
+
+            <!--Aplicação da Tabela -->
+
+            <!-- <ul>
+                <li *ngFor="let p of pessoas">
+                    {{p.nome}}
+                </li>
+            </ul> -->
+
+            <div class="ui-g-12">
+                    <p-table [value]="pessoas" [paginator]="true" [rows]=3 
+                    [responsive]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Cidade</th>
+                                    <th>Estado</th>
+                                    <th>Status</th>
+                                    <th class="col-valor-header"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-pessoas>
+                                <tr>
+                                    <td>{{pessoas.nome}}</td>
+                                    <td>{{pessoas.cidade}}</td>
+                                    <td>{{pessoas.estado}}</td>
+                                    <td>
+                                            <a style="color:#333333;" href="#" [pTooltip]="pessoas.ativo ? 'Desativar' : 'Ativar'" tooltipPosition="top">
+                                                {{pessoas.ativo ? 'Ativo' : 'Inativo'}}
+                                            </a>
+                                    </td>
+                                    <td class="col-acoes">
+                                        <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" style="margin:3px;"></a>
+                                        <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>    
+            </div><!--ui-g-12-->   
+
+            <div class="ui-g-12">
+                    <a pButton icon="pi pi-plus" pTooltip="Novo" tooltipPosition="top"></a>
+            </div>
+
+
+    </div><!--ui-g-->
+</div><!--container-->
