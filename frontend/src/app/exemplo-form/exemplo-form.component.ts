@@ -30,6 +30,7 @@ export class ExemploFormComponent  {
     //this.cliente.profissao = form.value.profissao;
     
     console.log(form);
+    form.reset({profissao:''});
     //console.log(this.cliente);
 
   }
