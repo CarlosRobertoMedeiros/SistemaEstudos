@@ -1,0 +1,61 @@
+<div class="container">
+    <form>
+        <div class="ui-g">
+            
+            <div class="ui-g-12">
+                <h1>Novo Lançamento</h1>
+            </div><!--ui-g-12-->
+
+            <div class="ui-g-12">
+                <p-selectButton [options]="tipos" #tipo></p-selectButton>
+            </div><!--ui-g-12-->
+
+            <div class="ui-g-6 ui-md-3 ui-fluid"><!--Data de Vencimento-->
+                <label>Vencimento</label>
+                <p-calendar dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false" [showIcon]="false"></p-calendar>
+            </div><!--Fim da Data de Vencimento-->
+
+            <div class="ui-g-6 ui-md-3 ui-fluid"><!--Data de Recebimento-->
+                <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
+                <p-calendar dateFormat="dd/mm/yy"></p-calendar>
+            </div><!--Fim da Data de Recebimento-->
+
+            <div class="ui-g-12 ui-md-9 ui-fluid"><!-- Descrição -->
+                <label>Descrição</label>
+                <input type="text" pInputText >
+            </div><!--Fim da Descrição -->
+
+            <div class="ui-g-12 ui-md-3 ui-fluid"><!--Valor-->
+                <label>Valor</label>
+                <input type="text" pInputText placeholder="0,00" 
+                    currencyMask [options]="{prefix:'',thousands:'.',decimal:',', allowNegative:false}"
+                >
+            </div><!--Fim do Valor-->
+
+            <div class="ui-g-12 ui-md-6 ui-fluid"><!--Categoria-->
+                <label>Categoria</label>
+                <p-dropdown [options]="categorias" placeholder="Selecione"></p-dropdown>
+
+            </div><!--Fim da Categoria-->
+
+            <div class="ui-g-12 ui-md-6 ui-fluid"><!--Pessoa-->
+                <label>Pessoa</label>
+                <p-dropdown [options]="pessoas" [filter]="true" placeholder="Selecione"></p-dropdown>
+            </div><!--Fim da Pessoa-->
+
+            <div class="ui-g-12 ui-fluid"><!--Observação-->
+                <label>Observação</label>
+                <textarea pInputTextarea rows="4"></textarea>
+            </div><!--Fim da Observação-->
+
+            <div class="ui-g-12">
+                <button pButton type="submit" label="Salvar" style="margin:3px;"></button>
+                <button pButton type="button" label="Novo" class="ui-button-info" style="margin:3px;"></button>
+                <a href="javascript:;">Voltar para a pesquisa</a>
+            
+            </div><!--ui-g-12-->
+
+
+        </div><!--ui-g-->
+    </form>
+</div><!--container-->
