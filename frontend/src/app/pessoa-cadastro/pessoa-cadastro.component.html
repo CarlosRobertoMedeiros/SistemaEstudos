@@ -1,5 +1,5 @@
 <div class="container">
-    <form autocomplete="off">
+    <form #f="ngForm" autocomplete="off">
         
         <div class="ui-g-12">
             <h1>Nova Pessoa</h1>
@@ -7,46 +7,145 @@
 
         <div class="ui-g-12 ui-fluid "><!--Nome-->
             <label>Nome</label>
-            <input type="text" pInputText />
+            <input type="text" pInputText name="nome"
+                ngModel #nome=ngModel required minlength="6" 
+            />
+            <!--Div de Validação de Campo-->
+            <div *ngIf="nome.invalid && (nome.dirty || nome.touched)"
+                class="alert alert-danger">
+
+                <div *ngIf="nome.errors.required">
+                    Informe o nome.
+                </div>
+                <div *ngIf="nome.errors.minlength">
+                    O nome deve ter no mínimo {{nome.errors.minlength.requiredLength}} caracteres.
+                </div>
+            </div>
+            <!--Fim da Div de Validação de Campo-->
+
+
         </div><!--ui-g-12--><!--Fim do Nome-->
 
         <div class="ui-g-12 ui-md-9 ui-fluid"><!--Logradouro-->
             <label>Logradouro</label>
-            <input type="text" pInputText>
+            <input type="text" pInputText name="logradouro" ngModel #logradouro=ngModel required minlength="10" >
+        
+            <!--Div de Validação de Campo-->
+            <div *ngIf="logradouro.invalid && (logradouro.dirty || logradouro.touched)"
+            class="alert alert-danger">
+
+                <div *ngIf="logradouro.errors.required">
+                    Informe o Logradouro.
+                </div>
+                <div *ngIf="logradouro.errors.minlength">
+                    O nome deve ter no mínimo {{logradouro.errors.minlength.requiredLength}} caracteres.
+                </div>
+            </div>
+            <!--Fim da Div de Validação de Campo-->
+        
         </div><!--Fim do Logradouro-->
 
         <div class="ui-g-12 ui-md-3 ui-fluid"><!--Número-->
-            <label>Número</label>
-            <input type="text" pInputText>
+            <label>Número </label>
+            <input type="text" pInputText name="numero" ngModel #numero=ngModel required minlength="2">
+
+            <!--Div de Validação de Campo-->
+            <div *ngIf="numero.invalid && (numero.dirty || numero.touched)"
+            class="alert alert-danger">
+
+                <div *ngIf="numero.errors.required">
+                    Informe o Número.
+                </div>
+                <div *ngIf="numero.errors.minlength">
+                    O número deve ter no mínimo {{numero.errors.minlength.requiredLength}} caracteres.
+                </div>
+            </div>
+            <!--Fim da Div de Validação de Campo-->
+
         </div><!--Fim do Número-->
 
         <div class="ui-g-12 ui-md-4 ui-fluid"><!--Complemento-->
             <label>Complemento</label>
             <input type="text" pInputText>
+            
         </div><!--Fim do Complemento-->
 
         <div class="ui-g-12 ui-md-4 ui-fluid"><!--Bairro-->
             <label>Bairro</label>
-            <input type="text" pInputText>
+            <input type="text" pInputText name="bairro" ngModel #bairro=ngModel required minlength="6">
+
+                <!--Div de Validação de Campo-->
+                <div *ngIf="bairro.invalid && (bairro.dirty || bairro.touched)"
+                class="alert alert-danger">
+    
+                    <div *ngIf="bairro.errors.required">
+                        Informe o bairro.
+                    </div>
+                    <div *ngIf="bairro.errors.minlength">
+                        O bairro deve ter no mínimo {{bairro.errors.minlength.requiredLength}} caracteres.
+                    </div>
+                </div>
+                <!--Fim da Div de Validação de Campo-->
+
         </div><!--Fim do Bairro-->
 
         <div class="ui-g-12 ui-md-4 ui-fluid"><!--Cep-->
             <label>CEP</label>
-            <p-inputMask mask="99.999-999"></p-inputMask>
+            <p-inputMask mask="99.999-999" name="cep" ngModel #cep=ngModel required></p-inputMask>
+
+            <!--Div de Validação de Campo-->
+            <div *ngIf="cep.invalid && (cep.dirty || cep.touched)"
+            class="alert alert-danger">
+
+                <div *ngIf="cep.errors.required">
+                    Informe o Cep.
+                </div>
+            </div>
+            <!--Fim da Div de Validação de Campo-->
+
+
         </div><!--Fim do Cep-->
 
         <div class="ui-g-12 ui-md-6 ui-fluid"><!--Cidade-->
             <label>Cidade</label>
-            <input type="text" pInputText>
+            <input type="text" pInputText name="cidade" ngModel #cidade=ngModel required minlength="5">
+
+            <!--Div de Validação de Campo-->
+            <div *ngIf="cidade.invalid && (cidade.dirty || cidade.touched)"
+            class="alert alert-danger">
+
+                <div *ngIf="cidade.errors.required">
+                    Informe o cidade.
+                </div>
+                <div *ngIf="cidade.errors.minlength">
+                    A cidade deve ter no mínimo {{cidade.errors.minlength.requiredLength}} caracteres.
+                </div>
+            </div>
+            <!--Fim da Div de Validação de Campo-->
+
+
         </div><!--Fim da Cidade-->
 
-        <div class="ui-g-12 ui-md-6 ui-fluid"><!--Cep-->
+        <div class="ui-g-12 ui-md-6 ui-fluid"><!--Estado-->
             <label>Estado</label>
-            <input type="text" pInputText>
-        </div><!--Fim do Cep-->
+            <input type="text" pInputText name="estado" ngModel #estado=ngModel required minlength="2" maxlength="2">
+
+            <!--Div de Validação de Campo-->
+            <div *ngIf="estado.invalid && (estado.dirty || estado.touched)" class="alert alert-danger">
+                <div *ngIf="estado.errors.required">
+                    Informe o Estado
+                </div>
+
+                <div *ngIf="estado.errors.minlength">
+                        O Estado deve ter no mínimo {{estado.errors.minlength.requiredLength}} caracteres.
+                </div>
+            </div>
+            <!--Fim da Div de Validação de Campo-->
+
+        </div><!--Fim do Estado-->
 
         <div class="ui-g-12">
-            <button pButton type="submit" label="Salvar" style="margin:5px;"></button>
+            <button pButton type="submit" label="Salvar" [disabled]="f.invalid" style="margin:5px;"></button>
             <button pButton type="button" label="Novo" class="ui-button-info" style="margin:5px;"></button>
             <a href="javascript:;">Voltar para a pesquisa</a>
         

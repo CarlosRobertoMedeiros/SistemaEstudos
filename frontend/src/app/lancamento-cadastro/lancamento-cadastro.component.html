@@ -1,5 +1,5 @@
 <div class="container">
-    <form>
+    <form #f="ngForm" autocomplete="off">
         <div class="ui-g">
             
             <div class="ui-g-12">
@@ -12,7 +12,14 @@
 
             <div class="ui-g-6 ui-md-3 ui-fluid"><!--Data de Vencimento-->
                 <label>Vencimento</label>
-                <p-calendar dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false" [showIcon]="false"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false" [showIcon]="false"
+                    name="vencimento" ngModel #vencimento="ngModel" required>
+                </p-calendar>
+                
+                <app-message [control]="vencimento" error="required"
+                    text="Informe uma data de vencimento">
+                </app-message>
+
             </div><!--Fim da Data de Vencimento-->
 
             <div class="ui-g-6 ui-md-3 ui-fluid"><!--Data de Recebimento-->
@@ -37,18 +44,18 @@
                 <label>Valor</label>
                 <input type="text" pInputText placeholder="0,00" name="valor" 
                     currencyMask [options]="{prefix:'',thousands:'.',decimal:',', allowNegative:false}"
-                ngModel>
+                ngModel required>
             </div><!--Fim do Valor-->
 
             <div class="ui-g-12 ui-md-6 ui-fluid"><!--Categoria-->
                 <label>Categoria</label>
-                <p-dropdown [options]="categorias" placeholder="Selecione"></p-dropdown>
+                <p-dropdown name="categoria" [options]="categorias" placeholder="Selecione" ngModel required></p-dropdown>
 
             </div><!--Fim da Categoria-->
 
             <div class="ui-g-12 ui-md-6 ui-fluid"><!--Pessoa-->
                 <label>Pessoa</label>
-                <p-dropdown [options]="pessoas" [filter]="true" placeholder="Selecione"></p-dropdown>
+                <p-dropdown name="pessoa" [options]="pessoas" [filter]="true" placeholder="Selecione" ngModel required></p-dropdown>
             </div><!--Fim da Pessoa-->
 
             <div class="ui-g-12 ui-fluid"><!--Observação-->
@@ -57,7 +64,7 @@
             </div><!--Fim da Observação-->
 
             <div class="ui-g-12">
-                <button pButton type="submit" label="Salvar" style="margin:3px;"></button>
+                <button pButton type="submit" label="Salvar" [disabled]="f.invalid" style="margin:3px;"></button>
                 <button pButton type="button" label="Novo" class="ui-button-info" style="margin:3px;"></button>
                 <a href="javascript:;">Voltar para a pesquisa</a>
             
