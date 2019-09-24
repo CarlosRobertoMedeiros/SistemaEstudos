@@ -1,0 +1,7 @@
+Interpolação de Variável em bind
+do Componente    {{nome}}            ao Template
+do Componente    [prop]="nome"       ao Template
+do Template    (click)="salvar()"    ao Componente
+[(ngModel)]="nome" === Esse é o two way databind do template ao compoente e vice-versa
+
+Continuar da 9.6
