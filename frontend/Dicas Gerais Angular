@@ -5,3 +5,5 @@ do Template    (click)="salvar()"    ao Componente
 [(ngModel)]="nome" === Esse é o two way databind do template ao compoente e vice-versa
 
 Continuar da 9.6
+    Olha o exemplo dicasInterpolação
+

@@ -1,0 +1,103 @@
+<!--Exemplo de interpolação de Variável-->
+<!--Usando a expressão de template-->
+<h1>Meu nome é {{nome}}</h1>
+<h2>minha idade é {{1+1}}</h2>
+<!-- <h2>Usando o Método  {{20+getIdate()}}</h2> -->
+
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        Funcionário adicionado: <strong>{{nome}}</strong>
+
+    </div>
+
+    <div class="form-group">
+            <label for="exampleFormControlInput1">Nome</label>
+            <input type="text" class="form-control" >
+    </div>
+
+    <!--Chamada usando eventbinding on-click="adicionar()"
+        Apenas chamo o método na classe ts
+
+        Esse tipo de binding é o one way ... apenas pega os valores do 
+        template e envia para o componente
+    -->
+
+    <!--Chamada usando eventbinding (click)="adicionar()"
+        Apenas chamo o método na classe ts com sintax sugar a mesma coisa 
+        do que foi feito acima, porém mais comum
+    -->
+
+    <!--
+        Prestar a atenção no Fluxo
+        O eventbinding a partir do template(esse arquivo html), esta chamando 
+        um método do componente DicasInterpolacaoComponent chamado adicionar()
+        Esse método está retornando o nome João mais uma sequencia randômica de 1 a 100
+        E está retornando para o template através 
+        da interpolação <strong>{{nome}}</strong> dentro do componente
+
+        Usando sem atualização de evento é assim 
+    -->
+    <button type="button" class="btn btn-primary" (click)="adicionar()" >Adicionar</button>
+
+    <!--Outro Exemplo ao clicar no link do texto-->
+    <div class="form-group">
+            <label for="exampleFormControlInput1">Nome</label>
+            <input type="text" class="form-control" (input)="alterarNome($event)" [value]="nome" >
+    </div>
+
+    <!-- NOVO ASSUNTO (Template Reference Variables) - Usando Variável de Referência de Template
+        Reproduzi a Tela para Ganhar Tempo
+
+        Foi criada a variável #nomeInput que pode ser acessada a partir do 
+        template 
+    -->
+        <div class="alert alert-success" role="alert">
+            Funcionário adicionado: <strong>{{nome}}</strong>
+    
+        </div>
+    
+        <div class="form-group">
+                <label for="exampleFormControlInput1">Nome</label>
+                <input type="text" class="form-control" #nomeInput >
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)="adicionar2(nomeInput.value)" >Adicionar</button>
+    
+        <!-- NOVO ASSUNTO (Usando Property Binding) - Desabilitando o botão  
+            Existem várias propriedades do dom eu queria desabilitar o botão sempre que o 
+            campo estiver vazio.
+            propertyBinding é a ação de Vincular uma propriedade do elemento a uma expressão typescript.
+
+            Adicionei o botão abaixo para teste
+            O atributo nome é do componente apenas um teste solto 
+            se forem inseridos menos de 15 caracteres eu desabilito o campo
+
+            Forma canônica de Fazer: bind-disabled="nome.length<15"
+            Sintax Sugar : [disabled]="nome.length<15"
+
+            Isso pode ser utilizado em qualquer elemento
+
+            o property binding busca do componente para o template
+
+            Outro Exemplo de PropertyBinding
+
+            <input type="text" class="form-control" (input)="alterarNome($event)" [value]="nome" >
+
+            A propriedade nome do componente é o valor que vai ser colocado
+            dentro da propriedade value do input
+        
+            CONTINUAR REVISÃO DO 9.10
+        -->
+        <button type="button" class="btn btn-primary" (click)="adicionar2(nomeInput.value)" [disabled]="nome.length<15" >Adicionar</button>
+
+    
+
+
+
+
+
+
+
+
+</div>
+

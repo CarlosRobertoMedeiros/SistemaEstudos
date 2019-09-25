@@ -31,6 +31,7 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { MessageComponent } from './message/message.component';
 import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
+import { DicasInterpolacaoComponent } from './dicas-interpolacao/dicas-interpolacao.component';
 
 
 
@@ -44,7 +45,8 @@ import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.co
     LancamentoCadastroComponent,
     PessoaCadastroComponent,
     MessageComponent,
-    LancamentosGridComponent
+    LancamentosGridComponent,
+    DicasInterpolacaoComponent
   ],
   imports: [
     BrowserModule,
