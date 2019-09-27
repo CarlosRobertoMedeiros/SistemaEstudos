@@ -91,7 +91,47 @@
         <button type="button" class="btn btn-primary" (click)="adicionar2(nomeInput.value)" [disabled]="nome.length<15" >Adicionar</button>
 
     
+        <!-- NOVO ASSUNTO (Usando o Two Way DataBinding) -->
+         <div class="alert alert-success" role="alert">
+            Usando TwoWay DataBind<br>
+            Funcionário adicionado: <strong>{{nome}}</strong>
+    
+        </div>
+    
+        <div class="form-group">
+                <label for="exampleFormControlInput1">Nome</label>
+                <input type="text" class="form-control" 
+                [(ngModel)]="nome"> 
+                <!--na linha acima se faz para a diretiva ngModel o event bind e o property bind
+                    Isso é o twoWayDataBind, ou seja, o atributo nome do componente
+                    é enviado ao template, enquanto os valores digitados no template
+                    a partir do click do botão abaixo são sincronizados e disponibilizados
+                    atrabés da propriedade {{nome}} na Tag acima
 
+                    Na pratica o two way databind
+                    é um (eventbinding) junto com um [propertybindind]
+                
+                
+                
+                
+                -->
+
+
+        <!-- revisão continuar a partir do 9.11 -->
+
+        <!-- Continuar a partir de módulos 14.1 -->
+                
+
+
+
+
+                
+                
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)="adicionar()" [disabled]="nome.length==0" >Adicionar</button>
+        
+        
 
 
 
