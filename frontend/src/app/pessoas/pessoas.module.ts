@@ -13,6 +13,9 @@ import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 
+
+import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   declarations: [
     PessoaCadastroComponent,
@@ -21,13 +24,15 @@ import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.co
   imports: [
     CommonModule,
     FormsModule,
-    
+        
     InputMaskModule,
     TableModule,
     TooltipModule,
     InputTextModule,
     InputTextareaModule,
-    ButtonModule
+    ButtonModule,
+
+    SharedModule
   ],
 
   exports:[

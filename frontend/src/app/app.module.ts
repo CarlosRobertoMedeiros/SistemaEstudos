@@ -1,27 +1,28 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule }     from './app-routing.module';
 import { AppComponent }         from './app.component';
 
-import { NavbarComponent } from './navbar/navbar.component';
+// Os próximos 2 Imports deveriam estar em outro Projeto
+// Como é um aprendizado nas técnicas, decidi não alterar
 import { ExemploFormComponent } from './exemplo-form/exemplo-form.component';
-import { FormsModule } from '@angular/forms';
-import { MessageComponent } from './message/message.component';
 import { DicasInterpolacaoComponent } from './dicas-interpolacao/dicas-interpolacao.component';
+
+import { CoreModule } from './core/core.module';
 
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     ExemploFormComponent,
-    MessageComponent,
     DicasInterpolacaoComponent
   ],
   imports: [
@@ -31,10 +32,10 @@ import { PessoasModule } from './pessoas/pessoas.module';
     BrowserAnimationsModule,
     FormsModule,
 
+    CoreModule,
+
     LancamentosModule,
-    PessoasModule,
-    
-    
+    PessoasModule
     
 ],
   providers: [],
