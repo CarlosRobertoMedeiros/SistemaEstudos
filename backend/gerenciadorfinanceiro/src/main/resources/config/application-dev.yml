@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: dev
+    include:
+      #- swagger
+
+
+  devtools:
+      restart:
+        enabled: true
+      livereload:
+        enabled: false #O Cliente Angular vai habilitar
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/gerenciadorfinanceiro?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: root
+
+  jpa:
+    database: mysql
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+  jackson:
+    date-format: yyyy-MM-dd
+
+  server:
+    port: 8080
+
+#  spring.jackson.deserialization.fail-on-unknown-properties=true
+
+
