@@ -1,6 +1,10 @@
 spring:
+
   profiles:
     active: @activatedProperties@
   main:
     banner-mode: "console"
+
+
+
 

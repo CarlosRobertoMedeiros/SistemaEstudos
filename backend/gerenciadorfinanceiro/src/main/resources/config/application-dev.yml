@@ -1,9 +1,16 @@
+logging:
+  level:
+    #ROOT: DEBUG
+    br.com.roberto.gerenciadorfinanceiro: DEBUG
+
 spring:
   profiles:
     active: dev
     include:
       #- swagger
 
+  application:
+    name: gerenciadorfinanceiro
 
   devtools:
       restart:
@@ -27,9 +34,13 @@ spring:
   jackson:
     date-format: yyyy-MM-dd
 
+
   server:
-    port: 8080
+    port: 9000
+
 
 #  spring.jackson.deserialization.fail-on-unknown-properties=true
+
+# https://www.baeldung.com/spring-yaml Olhar esse link
 
 
