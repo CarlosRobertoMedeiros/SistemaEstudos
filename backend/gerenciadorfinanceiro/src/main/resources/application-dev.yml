@@ -9,8 +9,8 @@ spring:
     include:
       #- swagger
 
-  application:
-    name: gerenciadorfinanceiro
+  app:
+    message: This is the primary Application Property for ${spring.application.name} specific to DEV
 
   devtools:
       restart:
@@ -33,7 +33,6 @@ spring:
 
   jackson:
     date-format: yyyy-MM-dd
-
 
   server:
     port: 9000

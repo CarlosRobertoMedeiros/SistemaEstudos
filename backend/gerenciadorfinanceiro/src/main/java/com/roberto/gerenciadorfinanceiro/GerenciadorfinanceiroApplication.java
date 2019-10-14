@@ -1,58 +1,41 @@
 package com.roberto.gerenciadorfinanceiro;
 
-import com.roberto.gerenciadorfinanceiro.ambiente.config.AmbienteConstantes;
-import com.roberto.gerenciadorfinanceiro.ambiente.config.PerfilPadraoUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.env.Environment;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collection;
+
+/**
+ * TODO: Criação do Perfil de Segurança com Integração com DEV ou Prod
+ *
+ *
+ */
 
 @SpringBootApplication
-public class GerenciadorfinanceiroApplication implements InitializingBean {
-
-	/* TODO: 08/10/2019 Informar no log os dados de conexão do ambiente e se possível um banner configurável,
-		     Pensar futuramente na implementação de segurança utilizando os profiles
-		     Para poder continuar com o curso de frontend
-	 */
-
-    /*
-     *   TODO: Implementar os testes unitários
-     * */
+public class GerenciadorfinanceiroApplication {
 
     private static final Logger log = LoggerFactory.getLogger(GerenciadorfinanceiroApplication.class);
 
-    private final Environment env;
-
-    public GerenciadorfinanceiroApplication(Environment env) {
-        this.env = env;
-    }
-
-
     public static void main(String[] args) {
-
         SpringApplication app = new SpringApplication(GerenciadorfinanceiroApplication.class);
-        PerfilPadraoUtil.adicionaPerfilPadrao(app);
         Environment env = app.run(args).getEnvironment();
         logarInicializacaoDaAplicacao(env);
     }
 
     private static void logarInicializacaoDaAplicacao(Environment env) {
-
         String protocol = "http";
-        if (env.getProperty("server.ssl.key-store") != null) {
+        if (env.getProperty("spring.server.ssl.key-store") != null) {
             protocol = "https";
         }
-        String serverPort = env.getProperty("server.port");
-        String contextPath = env.getProperty("server.servlet.context-path");
+        String serverPort = env.getProperty("spring.server.port");
+        String contextPath = env.getProperty("spring.server.servlet.context-path");
         if (StringUtils.isBlank(contextPath)) {
             contextPath = "/";
         }
@@ -66,7 +49,12 @@ public class GerenciadorfinanceiroApplication implements InitializingBean {
                         "Application '{}' is running! Access URLs:\n\t" +
                         "Local: \t\t{}://localhost:{}{}\n\t" +
                         "External: \t{}://{}:{}{}\n\t" +
-                        "Profile(s): \t{}\n----------------------------------------------------------",
+                        "Profile(s): {}\n\t" +
+                        "Database Information \n\t" +
+                        "Url: \t\t{}\n\t" +
+                        "Username: \t{}\n\t" +
+                        "Password: \t{}\n" +
+                        "----------------------------------------------------------",
                 env.getProperty("spring.application.name"),
                 protocol,
                 serverPort,
@@ -75,10 +63,13 @@ public class GerenciadorfinanceiroApplication implements InitializingBean {
                 hostAddress,
                 serverPort,
                 contextPath,
-                env.getActiveProfiles());
+                env.getActiveProfiles(),
+                env.getProperty("spring.datasource.url"),
+                env.getProperty("spring.datasource.username"),
+                env.getProperty("spring.datasource.password"));
     }
 
-    @Override
+    /*@Override
     public void afterPropertiesSet() throws Exception {
         Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
 
@@ -90,5 +81,6 @@ public class GerenciadorfinanceiroApplication implements InitializingBean {
             log.error("You have misconfigured your application! It should not " +
                     "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
-    }
+    }*/
 }
+
