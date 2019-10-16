@@ -1,11 +1,12 @@
 spring:
+  application:
+    name: gerenciadorfinanceiro
 
   profiles:
     active: @activatedProperties@
   main:
     banner-mode: "console"
-  application:
-    name: gerenciadorfinanceiro
+
 
 
 

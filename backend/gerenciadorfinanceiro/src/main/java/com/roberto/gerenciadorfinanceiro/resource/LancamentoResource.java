@@ -9,9 +9,10 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,8 +64,13 @@ public class LancamentoResource {
     }
 
     @PostMapping
-    public ResponseEntity<LancamentoModel> criar(@Valid @RequestBody LancamentoModel lancamento, HttpServletResponse resp){
+    public ResponseEntity<LancamentoModel> criar(@RequestBody LancamentoModel lancamento, HttpServletResponse resp){
         LancamentoModel lancamentoSalvo = lancamentoRepository.save(lancamento);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
+                  .buildAndExpand(lancamentoSalvo.getCodigo()).toUri();
+        resp.setHeader("Location",uri.toASCIIString());
+
         publisher.publishEvent(new RecursoCriadoEvent(this, resp, lancamentoSalvo.getCodigo()));
         return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
     }

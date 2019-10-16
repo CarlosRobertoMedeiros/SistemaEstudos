@@ -1,16 +1,14 @@
-logging:
-  level:
-    #ROOT: DEBUG
-    br.com.roberto.gerenciadorfinanceiro: DEBUG
+server:
+  port: 9000
 
 spring:
   profiles:
     active: dev
-    include:
+    #include:
       #- swagger
 
-  app:
-    message: This is the primary Application Property for ${spring.application.name} specific to DEV
+  #app:
+  #  message: This is the primary Application Property for ${spring.application.name} specific to DEV
 
   devtools:
       restart:
@@ -19,14 +17,14 @@ spring:
         enabled: false #O Cliente Angular vai habilitar
 
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
+    #type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/gerenciadorfinanceiro?useTimezone=true&serverTimezone=UTC
     username: root
     password: root
 
   jpa:
     database: mysql
-    show-sql: true
+    #show-sql: true
     generate-ddl: true
     hibernate:
       ddl-auto: update
@@ -34,8 +32,7 @@ spring:
   jackson:
     date-format: yyyy-MM-dd
 
-  server:
-    port: 9000
+
 
 
 #  spring.jackson.deserialization.fail-on-unknown-properties=true

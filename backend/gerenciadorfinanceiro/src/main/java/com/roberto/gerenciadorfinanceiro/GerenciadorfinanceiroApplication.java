@@ -1,20 +1,18 @@
 package com.roberto.gerenciadorfinanceiro;
 
 import org.apache.commons.lang3.StringUtils;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * TODO: Criação do Perfil de Segurança com Integração com DEV ou Prod
- *
+ * TODO: Perfil Basic Criado atrabés do Spring Security
+ * https://www.baeldung.com/spring-profiles
  *
  */
 
@@ -34,7 +32,7 @@ public class GerenciadorfinanceiroApplication {
         if (env.getProperty("spring.server.ssl.key-store") != null) {
             protocol = "https";
         }
-        String serverPort = env.getProperty("spring.server.port");
+        String serverPort = env.getProperty("server.port");
         String contextPath = env.getProperty("spring.server.servlet.context-path");
         if (StringUtils.isBlank(contextPath)) {
             contextPath = "/";
