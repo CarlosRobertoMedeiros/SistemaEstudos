@@ -11,10 +11,14 @@ import { AppComponent }         from './app.component';
 import { ExemploFormComponent } from './exemplo-form/exemplo-form.component';
 import { DicasInterpolacaoComponent } from './dicas-interpolacao/dicas-interpolacao.component';
 
+import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
+import { LancamentoService } from './lancamentos/lancamento.service';
+
+
 
 
 
@@ -27,6 +31,7 @@ import { PessoasModule } from './pessoas/pessoas.module';
   ],
   imports: [
     AppRoutingModule,
+    HttpClientModule,
 
     BrowserModule,
     BrowserAnimationsModule,
@@ -37,8 +42,9 @@ import { PessoasModule } from './pessoas/pessoas.module';
     LancamentosModule,
     PessoasModule
     
+    
 ],
-  providers: [],
+  providers: [LancamentoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
