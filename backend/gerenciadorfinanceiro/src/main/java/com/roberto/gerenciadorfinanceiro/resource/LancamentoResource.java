@@ -2,20 +2,25 @@ package com.roberto.gerenciadorfinanceiro.resource;
 
 
 import com.roberto.gerenciadorfinanceiro.event.RecursoCriadoEvent;
+import com.roberto.gerenciadorfinanceiro.filter.LancamentoFilter;
 import com.roberto.gerenciadorfinanceiro.model.LancamentoModel;
 import com.roberto.gerenciadorfinanceiro.repository.LancamentoRepository;
+import com.roberto.gerenciadorfinanceiro.repository.projection.ResumoLancamento;
 import com.roberto.gerenciadorfinanceiro.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 
 import javax.servlet.http.HttpServletResponse;
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 @RestController
 @RequestMapping("api/lancamentos")
@@ -29,6 +34,16 @@ public class LancamentoResource {
 
     @Autowired
     private ApplicationEventPublisher publisher;
+
+    @GetMapping
+    public Page<LancamentoModel> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoRepository.filtrar(lancamentoFilter,pageable);
+    }
+
+    @GetMapping(params="resumo")
+    public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoRepository.resumir(lancamentoFilter,pageable);
+    }
 
     @GetMapping
     public ResponseEntity<?> listarTodos() {
