@@ -4,6 +4,7 @@ package com.roberto.gerenciadorfinanceiro.resource;
 import com.roberto.gerenciadorfinanceiro.event.RecursoCriadoEvent;
 import com.roberto.gerenciadorfinanceiro.model.LancamentoModel;
 import com.roberto.gerenciadorfinanceiro.repository.LancamentoRepository;
+import com.roberto.gerenciadorfinanceiro.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ public class LancamentoResource {
 
     @Autowired
     private LancamentoRepository lancamentoRepository;
+
+    @Autowired
+    private LancamentoService lancamentoService;
 
     @Autowired
     private ApplicationEventPublisher publisher;
@@ -65,11 +69,7 @@ public class LancamentoResource {
 
     @PostMapping
     public ResponseEntity<LancamentoModel> criar(@RequestBody LancamentoModel lancamento, HttpServletResponse resp){
-        LancamentoModel lancamentoSalvo = lancamentoRepository.save(lancamento);
-
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-                  .buildAndExpand(lancamentoSalvo.getCodigo()).toUri();
-        resp.setHeader("Location",uri.toASCIIString());
+        LancamentoModel lancamentoSalvo = lancamentoService.salvar(lancamento);
 
         publisher.publishEvent(new RecursoCriadoEvent(this, resp, lancamentoSalvo.getCodigo()));
         return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
