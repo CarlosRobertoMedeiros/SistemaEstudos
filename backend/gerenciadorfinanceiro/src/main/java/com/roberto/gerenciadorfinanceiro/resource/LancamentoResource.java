@@ -45,16 +45,6 @@ public class LancamentoResource {
         return lancamentoRepository.resumir(lancamentoFilter,pageable);
     }
 
-    @GetMapping
-    public ResponseEntity<?> listarTodos() {
-        List<LancamentoModel> lancamentos = lancamentoRepository.findAll();
-
-        if (!lancamentos.isEmpty())
-            return ResponseEntity.ok(lancamentos);
-
-        return ResponseEntity.noContent().build();
-    }
-
     @GetMapping("{codigo}")
     public ResponseEntity<?> listarPorCodigo(@PathVariable Long codigo) {
         Optional<LancamentoModel> lancamento = lancamentoRepository.findById(codigo);
