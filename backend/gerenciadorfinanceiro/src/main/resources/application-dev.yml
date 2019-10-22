@@ -10,6 +10,12 @@ spring:
   #app:
   #  message: This is the primary Application Property for ${spring.application.name} specific to DEV
 
+  gerenciador:
+    seguranca:
+      enable-https:false;
+
+    origin-permitido:
+      localhost:9000
   devtools:
       restart:
         enabled: true
