@@ -10,12 +10,12 @@ spring:
   #app:
   #  message: This is the primary Application Property for ${spring.application.name} specific to DEV
 
-  gerenciador:
-    seguranca:
-      enable-https:false;
+  gerenciadorfinanceiro:
+    originPermitida: http://localhost:4200 #Referencia ao Angular
 
-    origin-permitido:
-      localhost:9000
+    seguranca: enable-https:false #front end a partir de 10:49
+
+
   devtools:
       restart:
         enabled: true

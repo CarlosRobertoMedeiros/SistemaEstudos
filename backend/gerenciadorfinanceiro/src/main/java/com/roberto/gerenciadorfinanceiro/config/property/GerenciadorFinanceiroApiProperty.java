@@ -2,13 +2,19 @@ package com.roberto.gerenciadorfinanceiro.config.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("gerenciadorfinanceiro")
+@ConfigurationProperties(prefix = "gerenciadorfinanceiro")
 public class GerenciadorFinanceiroApiProperty {
-    private final String originPermitida = "http://localhost:9000";
 
-    public final String getOriginPermitida() {
+    private String originPermitida = "http://localhost:4200";
+
+    public String getOriginPermitida() {
         return originPermitida;
     }
+
+    public void  setOriginPermitida(String originPermitida){
+        this.originPermitida = originPermitida;
+    }
+
 
     private final Seguranca seguranca = new Seguranca();
 
