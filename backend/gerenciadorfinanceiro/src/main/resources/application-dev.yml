@@ -23,10 +23,10 @@ spring:
         enabled: false #O Cliente Angular vai habilitar
 
   datasource:
-    #type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/gerenciadorfinanceiro?useTimezone=true&serverTimezone=UTC
     username: root
     password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     database: mysql
