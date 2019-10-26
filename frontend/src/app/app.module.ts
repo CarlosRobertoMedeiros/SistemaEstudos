@@ -19,10 +19,6 @@ import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentoService } from './lancamentos/lancamento.service';
 
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,9 +34,10 @@ import { LancamentoService } from './lancamentos/lancamento.service';
     FormsModule,
 
     CoreModule,
-
     LancamentosModule,
-    PessoasModule
+    PessoasModule,
+    //Table, // Added DataTableModule
+       // PaginatorModule //  Added PaginatorModule
     
     
 ],

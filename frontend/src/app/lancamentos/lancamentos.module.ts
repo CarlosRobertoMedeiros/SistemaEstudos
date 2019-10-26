@@ -16,14 +16,13 @@ import { SharedModule } from '../shared/shared.module';
 
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
+
 
 
 @NgModule({
   declarations: [
     LancamentoCadastroComponent,
-    LancamentosPesquisaComponent,
-    LancamentosGridComponent
+    LancamentosPesquisaComponent
   ],
 
   imports: [
@@ -38,9 +37,7 @@ import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.co
     TableModule,
     TooltipModule,
     CurrencyMaskModule,
-
     SharedModule
-
   ],
 
   exports:[
