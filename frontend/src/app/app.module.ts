@@ -35,11 +35,7 @@ import { LancamentoService } from './lancamentos/lancamento.service';
 
     CoreModule,
     LancamentosModule,
-    PessoasModule,
-    //Table, // Added DataTableModule
-       // PaginatorModule //  Added PaginatorModule
-    
-    
+    PessoasModule
 ],
   providers: [LancamentoService],
   bootstrap: [AppComponent]

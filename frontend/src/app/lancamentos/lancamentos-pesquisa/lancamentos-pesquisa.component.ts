@@ -20,9 +20,8 @@ export class LancamentosPesquisaComponent implements OnInit {
 
 
   ngOnInit(){
-    //this.pesquisar();
+    
   }
-
 
   pesquisar(pagina=0){
     this.filtro.pagina = pagina; 
@@ -30,17 +29,12 @@ export class LancamentosPesquisaComponent implements OnInit {
     this.lancamentoService.pesquisar(this.filtro)
       .then(resultado => {
         this.totalRegistros = resultado.total;
-        this.lancamentos = resultado.lancamentos
+        this.lancamentos = resultado.lancamentos;
       });
-
   }
 
   aoMudarPagina(event:LazyLoadEvent){
-    console.log(event);
-    //const pagina = event.first / event.rows; // 0/5 = pagina 0 5/5 = pagina 1 ....
-    //this.pesquisar(pagina);
-    //Olhar novamente o 17.6
+    const pagina = event.first / event.rows; 
+    this.pesquisar(pagina);
   }
-
-
 }

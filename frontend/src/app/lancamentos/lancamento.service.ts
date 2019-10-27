@@ -52,7 +52,8 @@ export class LancamentoService {
           lancamentos,
           total:response['totalElements']
         }
-        return resultado;
+
+       return resultado;
       });
   }
 }
