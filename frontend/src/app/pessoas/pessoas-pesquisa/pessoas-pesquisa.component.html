@@ -1,18 +1,20 @@
 <div class="container">
     <div class="ui-g">
 
-            <div class="ui-g-12">
-                <h1>Pessoas</h1>
-            </div><!--ui-g-12-->
+            <form autocomplete="off" (ngSubmit)="pesquisar()">
+                <div class="ui-g-12">
+                    <h1>Pessoas</h1>
+                </div><!--ui-g-12-->
 
-            <div class="ui-g-12 ui-fluid">
-                <label>Nome</label>
-                <input type="text" pInputText>
-            </div><!--ui-g-12 ui-fluid-->   
+                <div class="ui-g-12 ui-fluid">
+                    <label>Nome</label>
+                    <input type="text" pInputText name="nome" [(ngModel)]="nome">
+                </div><!--ui-g-12 ui-fluid-->   
 
-            <div class="ui-g-12">
-                <button type="submit" pButton label="Pesquisar"></button>
-            </div><!--ui-g-12-->   
+                <div class="ui-g-12">
+                    <button type="submit" pButton label="Pesquisar"></button>
+                </div><!--ui-g-12-->  
+            </form> 
 
             <!--Aplicação da Tabela -->
 

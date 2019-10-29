@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PessoaService, PessoaFiltro } from '../pessoa.service';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pessoas-pesquisa.component.css']
 })
 export class PessoasPesquisaComponent {
+  
+  filtro = new PessoaFiltro();
+  
   pessoas = [
       { nome: 'Manoel Pinheiro', cidade: 'Uberlândia', estado: 'MG', ativo: true },
       { nome: 'Sebastião da Silva', cidade: 'São Paulo', estado: 'SP', ativo: false },
@@ -15,4 +19,13 @@ export class PessoasPesquisaComponent {
       { nome: 'Paula Maria', cidade: 'Uberlândia', estado: 'MG', ativo: true }
   ]
   
+  constructor(private pessoaService:PessoaService){};
+
+  pesquisar(pagina=0){
+    console.log("Cheguei no TS"+this.filtro);
+    //this.pessoaService.pesquisar();
+  }
+
+
+
 }
