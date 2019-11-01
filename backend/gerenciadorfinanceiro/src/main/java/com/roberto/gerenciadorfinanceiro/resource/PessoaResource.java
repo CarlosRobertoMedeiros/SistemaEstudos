@@ -22,14 +22,21 @@ public class PessoaResource {
     private PessoaRepository pessoaRepository;
 
     //TODO: Reimplementar o ListarTodos retornando uma paginação, evitando as consultas baseadas em eager
+//    Antes a API era assim
+//    @GetMapping
+//    public ResponseEntity<List<PessoaModel>> ListarTodas(){
+//        List<PessoaModel> pessoas = pessoaRepository.findAll();
+//        if (pessoas.isEmpty()){
+//            return  ResponseEntity.noContent().build();
+//        }
+//        return ResponseEntity.ok().body(pessoas);
+//    }
+
     @GetMapping
-    public ResponseEntity<List<PessoaModel>> ListarTodas(){
-        List<PessoaModel> pessoas = pessoaRepository.findAll();
-        if (pessoas.isEmpty()){
-            return  ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok().body(pessoas);
+    public Page<PessoaModel>ListarTodas(PessoaFilter pessoaFilter, Pageable pageable){
+        return pessoaRepository.filtrar(pessoaFilter,pageable);
     }
+
 
     @GetMapping(params = "listar")
     public Page<PessoaModel> ListarComFiltro(PessoaFilter pessoaFilter, Pageable pageable){

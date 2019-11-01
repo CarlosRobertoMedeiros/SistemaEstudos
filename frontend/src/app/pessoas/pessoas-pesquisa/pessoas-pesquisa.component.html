@@ -8,7 +8,7 @@
 
                 <div class="ui-g-12 ui-fluid">
                     <label>Nome</label>
-                    <input type="text" pInputText name="nome" [(ngModel)]="nome">
+                    <input type="text" pInputText name="nome" [(ngModel)]="filtro.nome">
                 </div><!--ui-g-12 ui-fluid-->   
 
                 <div class="ui-g-12">
@@ -25,8 +25,11 @@
             </ul> -->
 
             <div class="ui-g-12">
-                    <p-table [value]="pessoas" [paginator]="true" [rows]=3 
-                    [responsive]="true">
+                    <p-table [value]="pessoas" [responsive]="true" 
+                    emptyMessage="Nenhuma pessoa encontrada"
+                    [paginator]="true" [rows]="filtro.itensPorPagina"
+                    [lazy]="true" [totalRecords]="totalRegistros"
+                    (onLazyLoad)="aoMudarPagina($event)">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>Nome</th>
@@ -39,8 +42,8 @@
                             <ng-template pTemplate="body" let-pessoas>
                                 <tr>
                                     <td>{{pessoas.nome}}</td>
-                                    <td>{{pessoas.cidade}}</td>
-                                    <td>{{pessoas.estado}}</td>
+                                    <td>{{pessoas.endereco.cidade}}</td>
+                                    <td>{{pessoas.endereco.estado}}</td>
                                     <td>
                                             <a style="color:#333333;" href="#" [pTooltip]="pessoas.ativo ? 'Desativar' : 'Ativar'" tooltipPosition="top">
                                                 {{pessoas.ativo ? 'Ativo' : 'Inativo'}}
