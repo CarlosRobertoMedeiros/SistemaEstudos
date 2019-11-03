@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import * as moment from 'moment';
+import { promise } from 'protractor';
 
 
 export class LancamentoFiltro{
@@ -55,5 +56,15 @@ export class LancamentoService {
 
        return resultado;
       });
+  }
+
+  excluir(codigo:number):Promise<void>{
+    
+    let headers = new HttpHeaders().append('Authorization','Basic YWRtaW46YWRtaW4=');
+    let params = new HttpParams();
+
+    return this.http.delete(`${this.lancamentosUrl}/${codigo}`,{headers})
+      .toPromise()
+      .then(()=>null);
   }
 }

@@ -64,7 +64,7 @@
           emptyMessage="Nenhum lançamento encontrado"
           [paginator]="true" [rows]="filtro.itensPorPagina"
           [lazy]="true" [totalRecords]="totalRegistros"
-          (onLazyLoad)="aoMudarPagina($event)">
+          (onLazyLoad)="aoMudarPagina($event)" #tabela>
             <ng-template pTemplate="header">
                 <tr>
                     <th>Pessoa</th>
@@ -84,7 +84,12 @@
                     <td><span [style.color]="lanc.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lanc.valor | number:'1.2-2' }}</span></td>
                     <td>
                         <a style="margin-right:2px" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></a>
-                        <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+                        <button 
+                            pButton icon="pi pi-trash" 
+                            pTooltip="Excluir" 
+                            tooltipPosition="top"
+                            (click)="confirmarExclusao(lanc)">
+                        </button>
                     </td>
                 </tr>
             </ng-template>
