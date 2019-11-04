@@ -3,16 +3,13 @@ package com.roberto.gerenciadorfinanceiro.resource;
 import com.roberto.gerenciadorfinanceiro.filter.PessoaFilter;
 import com.roberto.gerenciadorfinanceiro.model.PessoaModel;
 import com.roberto.gerenciadorfinanceiro.repository.PessoaRepository;
-import com.sun.xml.bind.v2.TODO;
+import com.roberto.gerenciadorfinanceiro.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/pessoas")
@@ -20,6 +17,9 @@ public class PessoaResource {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private PessoaService pessoaService;
 
     //TODO: Reimplementar o ListarTodos retornando uma paginação, evitando as consultas baseadas em eager
 //    Antes a API era assim
@@ -43,11 +43,18 @@ public class PessoaResource {
         return pessoaRepository.filtrar(pessoaFilter,pageable);
 
     }
-    /*public Page<LancamentoModel> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
-        return lancamentoRepository.filtrar(lancamentoFilter,pageable);
-    }*/
 
+    @DeleteMapping("{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long codigo){
+        pessoaRepository.deleteById(codigo);
+    }
 
+    @PutMapping("/{codigo}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void atualizar(@PathVariable PessoaModel pessoaModel, @RequestBody boolean ativo){
+        pessoaService.atuallizarPropriedadeAtiva(pessoaModel,ativo);
+    }
 
 
 }
