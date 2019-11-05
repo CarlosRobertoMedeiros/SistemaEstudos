@@ -41,7 +41,6 @@ public class PessoaResource {
     @GetMapping(params = "listar")
     public Page<PessoaModel> ListarComFiltro(PessoaFilter pessoaFilter, Pageable pageable){
         return pessoaRepository.filtrar(pessoaFilter,pageable);
-
     }
 
     @DeleteMapping("{codigo}")
@@ -52,8 +51,8 @@ public class PessoaResource {
 
     @PutMapping("/{codigo}/ativo")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizar(@PathVariable PessoaModel pessoaModel, @RequestBody boolean ativo){
-        pessoaService.atuallizarPropriedadeAtiva(pessoaModel,ativo);
+    public void atualizar(@PathVariable Long codigo, @RequestBody boolean ativo){
+        pessoaService.atuallizarPropriedadeAtiva(codigo,ativo);
     }
 
 

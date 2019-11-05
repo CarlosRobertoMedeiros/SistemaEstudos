@@ -14,14 +14,14 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public void atuallizarPropriedadeAtiva(PessoaModel pessoaModel, boolean ativo){
-        PessoaModel pessoaSalva = buscarPeloCodigo(pessoaModel);
+    public void atuallizarPropriedadeAtiva(Long codigo, boolean ativo){
+        PessoaModel pessoaSalva = buscarPeloCodigo(codigo);
         pessoaSalva.setAtivo(ativo);
         pessoaRepository.save(pessoaSalva);
     }
 
-    private PessoaModel buscarPeloCodigo(PessoaModel pessoaModel) {
-        PessoaModel pessoaSalva = pessoaRepository.findById(pessoaModel.getCodigo()).get();
+    private PessoaModel buscarPeloCodigo(Long codigo) {
+        PessoaModel pessoaSalva = pessoaRepository.findById(codigo).get();
         if (pessoaSalva==null){
             throw new EmptyResultDataAccessException(1);
         }

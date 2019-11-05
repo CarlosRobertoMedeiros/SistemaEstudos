@@ -58,4 +58,17 @@ export class PessoasPesquisaComponent {
 
   }
 
+  mudarStatus(pessoa:any){
+    //console.log(JSON.stringify(pessoa));
+    let novoStatus = !pessoa.ativo;
+
+    this.pessoaService.mudarStatus(pessoa.codigo,novoStatus)
+      .then(()=>{
+        pessoa.ativo = novoStatus;
+        this.toasty.success(`O Status de ${pessoa.nome} foi alterado para ${novoStatus===false?"Inativo":"Ativo"}`);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+
+  }
+
 }
