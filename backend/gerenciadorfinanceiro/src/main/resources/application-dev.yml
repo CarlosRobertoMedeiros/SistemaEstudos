@@ -35,8 +35,13 @@ spring:
     hibernate:
       ddl-auto: update
 
-  jackson:
-    date-format: yyyy-MM-dd
+  #jackson:
+  #  date-format: yyyy-MM-dd
+
+
+
+
+
 
 
 

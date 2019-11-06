@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/pessoas")
 public class PessoaResource {
@@ -23,19 +25,19 @@ public class PessoaResource {
 
     //TODO: Reimplementar o ListarTodos retornando uma paginação, evitando as consultas baseadas em eager
 //    Antes a API era assim
-//    @GetMapping
-//    public ResponseEntity<List<PessoaModel>> ListarTodas(){
-//        List<PessoaModel> pessoas = pessoaRepository.findAll();
-//        if (pessoas.isEmpty()){
-//            return  ResponseEntity.noContent().build();
-//        }
-//        return ResponseEntity.ok().body(pessoas);
-//    }
-
     @GetMapping
+    public ResponseEntity<Object> ListarTodas(){
+        List<PessoaModel> pessoas = pessoaRepository.findAll();
+        if (pessoas.isEmpty()){
+            return  ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(pessoas);
+    }
+
+    /*@GetMapping
     public Page<PessoaModel>ListarTodas(PessoaFilter pessoaFilter, Pageable pageable){
         return pessoaRepository.filtrar(pessoaFilter,pageable);
-    }
+    }*/
 
 
     @GetMapping(params = "listar")

@@ -48,7 +48,7 @@ export class PessoaService {
 
     return this.http.get(this.pessoasUrl, {headers})
       .toPromise()
-      .then(response => response['content']);
+      .then();
   }
 
   excluir(codigo:any):Promise<void> {
