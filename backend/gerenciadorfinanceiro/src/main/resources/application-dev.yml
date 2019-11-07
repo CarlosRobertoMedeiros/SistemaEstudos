@@ -36,7 +36,9 @@ spring:
       ddl-auto: update
 
   #jackson:
-  #  date-format: yyyy-MM-dd
+  #  date-format: "YYYY-MM-dd"
+  #  serialization:
+  #    write_dates_as_timestamps: false
 
 
 

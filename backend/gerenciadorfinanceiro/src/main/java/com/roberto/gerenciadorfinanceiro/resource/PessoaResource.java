@@ -1,16 +1,20 @@
 package com.roberto.gerenciadorfinanceiro.resource;
 
+import com.roberto.gerenciadorfinanceiro.event.RecursoCriadoEvent;
 import com.roberto.gerenciadorfinanceiro.filter.PessoaFilter;
 import com.roberto.gerenciadorfinanceiro.model.PessoaModel;
 import com.roberto.gerenciadorfinanceiro.repository.PessoaRepository;
 import com.roberto.gerenciadorfinanceiro.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,6 +26,9 @@ public class PessoaResource {
 
     @Autowired
     private PessoaService pessoaService;
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     //TODO: Reimplementar o ListarTodos retornando uma paginação, evitando as consultas baseadas em eager
 //    Antes a API era assim
@@ -55,6 +62,14 @@ public class PessoaResource {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void atualizar(@PathVariable Long codigo, @RequestBody boolean ativo){
         pessoaService.atuallizarPropriedadeAtiva(codigo,ativo);
+    }
+
+    @PostMapping
+    public ResponseEntity<PessoaModel> criar(@RequestBody PessoaModel pessoa, HttpServletResponse resp){
+        PessoaModel pessoaSalva = pessoaRepository.save(pessoa);
+
+        publisher.publishEvent(new RecursoCriadoEvent(this, resp, pessoaSalva.getCodigo()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
     }
 
 

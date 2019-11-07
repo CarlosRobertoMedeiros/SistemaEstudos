@@ -1,5 +1,5 @@
 <div class="container">
-    <form #f="ngForm" autocomplete="off">
+    <form #f="ngForm" autocomplete="off" (submit)="salvar(f)">
         
         <div class="ui-g-12">
             <h1>Nova Pessoa</h1>
@@ -8,8 +8,9 @@
         <div class="ui-g-12 ui-fluid "><!--Nome-->
             <label>Nome</label>
             <input type="text" pInputText name="nome"
-                ngModel #nome=ngModel required minlength="6" 
-            />
+                [(ngModel)]="pessoa.nome" 
+                #nome="ngModel" 
+                required minlength="6" />
             <!--Div de Validação de Campo-->
             <app-message 
                 [control]="nome" 
@@ -29,8 +30,10 @@
 
         <div class="ui-g-12 ui-md-9 ui-fluid"><!--Logradouro-->
             <label>Logradouro</label>
-            <input type="text" pInputText name="logradouro" ngModel #logradouro=ngModel required minlength="10" >
-        
+            <input type="text" pInputText name="logradouro" 
+                [(ngModel)]="pessoa.endereco.logradouro" 
+                #logradouro="ngModel" 
+                required minlength="10" />
             <!--Div de Validação de Campo-->
             <app-message 
                 [control]="logradouro" 
@@ -41,9 +44,12 @@
         
         </div><!--Fim do Logradouro-->
 
+        
         <div class="ui-g-12 ui-md-3 ui-fluid"><!--Número-->
-            <label>Número </label>
-            <input type="text" pInputText name="numero" ngModel #numero=ngModel required minlength="2">
+            <label>Número</label>
+            <input type="text" pInputText name="numero" 
+                [(ngModel)]="pessoa.endereco.numero" 
+                #numero ="ngModel" required minlength="2"/>
 
             <!--Div de Validação de Campo-->
             <app-message 
@@ -54,16 +60,22 @@
             <!--Fim da Div de Validação de Campo-->
 
         </div><!--Fim do Número-->
+        
 
         <div class="ui-g-12 ui-md-4 ui-fluid"><!--Complemento-->
             <label>Complemento</label>
-            <input type="text" pInputText>
+            <input type="text" pInputText name="complemento"
+                [(ngModel)]="pessoa.endereco.complemento" 
+                #complemento="ngModel" />
             
         </div><!--Fim do Complemento-->
 
         <div class="ui-g-12 ui-md-4 ui-fluid"><!--Bairro-->
             <label>Bairro</label>
-            <input type="text" pInputText name="bairro" ngModel #bairro=ngModel required minlength="6">
+            <input type="text" pInputText name="bairro" 
+                [(ngModel)]="pessoa.endereco.bairro" 
+                #bairro="ngModel"
+                required minlength="6" />
 
                 <!--Div de Validação de Campo-->
                 <app-message 
@@ -83,7 +95,9 @@
 
         <div class="ui-g-12 ui-md-4 ui-fluid"><!--Cep-->
             <label>CEP</label>
-            <p-inputMask mask="99.999-999" name="cep" ngModel #cep=ngModel required></p-inputMask>
+            <p-inputMask mask="99.999-999" name="cep" 
+                [(ngModel)]="pessoa.endereco.cep" 
+                #cep="ngModel" required></p-inputMask>
 
             <!--Div de Validação do Campo-->
                 <app-message 
@@ -98,7 +112,9 @@
 
         <div class="ui-g-12 ui-md-6 ui-fluid"><!--Cidade-->
             <label>Cidade</label>
-            <input type="text" pInputText name="cidade" ngModel #cidade=ngModel required minlength="5">
+            <input type="text" pInputText name="cidade" 
+                [(ngModel)]="pessoa.endereco.cidade" 
+                #cidade="ngModel" required minlength="5" />
 
             <!--Div de Validação de Campo-->
             <app-message 
@@ -119,7 +135,9 @@
 
         <div class="ui-g-12 ui-md-6 ui-fluid"><!--Estado-->
             <label>Estado</label>
-            <input type="text" pInputText name="estado" ngModel #estado=ngModel required minlength="2" maxlength="2">
+            <input type="text" pInputText name="estado" 
+                [(ngModel)]="pessoa.endereco.estado" 
+                #estado="ngModel" required minlength="2" maxlength="2" />
 
             <!--Div de Validação de Campo-->
             <app-message 

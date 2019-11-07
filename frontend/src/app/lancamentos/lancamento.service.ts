@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import * as moment from 'moment';
 import { promise } from 'protractor';
+import { Lancamento } from '../core/model';
 
 
 export class LancamentoFiltro{
@@ -67,4 +68,17 @@ export class LancamentoService {
       .toPromise()
       .then(()=>null);
   }
+
+  adicionar(lancamento:Lancamento):Promise<Lancamento>{
+    let headers = new HttpHeaders()
+      .append('Authorization','Basic YWRtaW46YWRtaW4=')
+      .append('Content-Type','application/json');
+
+      return this.http.post(this.lancamentosUrl,JSON.stringify(lancamento) ,{headers})
+        .toPromise()
+        .then();
+
+  }
+
+
 }
