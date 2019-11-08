@@ -83,7 +83,9 @@
                     <td><span>{{ lanc.dataPagamento | date:'dd/MM/yyyy' }}</span></td>
                     <td><span [style.color]="lanc.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lanc.valor | number:'1.2-2' }}</span></td>
                     <td>
-                        <a style="margin-right:2px" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+                        <a style="margin-right:2px" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
+                        [routerLink]="['/lancamentos',lanc.codigo]"
+                        ></a>
                         <button 
                             pButton icon="pi pi-trash" 
                             pTooltip="Excluir" 
@@ -98,7 +100,7 @@
     </div>
 
     <div class="ui-g-12">
-       <a pButton icon="pi pi-plus" pTooltip="Novo" tooltipPosition="top"></a>
+       <a pButton icon="pi pi-plus" pTooltip="Novo" tooltipPosition="top" routerLink="/lancamentos/novo"></a>
     </div>
   
   </div>

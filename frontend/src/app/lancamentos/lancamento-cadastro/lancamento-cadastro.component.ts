@@ -10,6 +10,7 @@ import { LancamentoService } from '../lancamento.service';
 import { Lancamento } from 'src/app/core/model';
 
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -33,9 +34,12 @@ export class LancamentoCadastroComponent implements OnInit {
               private pessoaService:PessoaService,
               private lancamentoService:LancamentoService,
               private toasty:ToastrService,
-              private errorHandler:ErrorHandlerService) { }
+              private errorHandler:ErrorHandlerService,
+              private route:ActivatedRoute) { }
 
   ngOnInit() {
+    //console.log(this.route.snapshot.params['codigo']); //Retorna o Código
+    
     this.carregarCategorias();
     this.carregarPessoas();
   }

@@ -15,8 +15,7 @@ import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdia
 import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorHandlerService } from './error-handler.service';
 import { PessoaService } from '../pessoas/pessoa.service';
-
-
+import { RouterModule } from '@angular/router';
 
 
 
@@ -27,6 +26,7 @@ import { PessoaService } from '../pessoas/pessoa.service';
 
   imports: [
     CommonModule,
+    RouterModule,
     
     ToastrModule.forRoot(), // ToastrModule added
     ConfirmDialogModule,

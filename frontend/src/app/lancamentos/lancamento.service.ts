@@ -80,5 +80,18 @@ export class LancamentoService {
 
   }
 
+  atualizar(lancamento:Lancamento):Promise<Lancamento>{
+    return null;
+  }
+
+  buscarPorCodigo(codigo:number):Promise<Lancamento>{
+    return null;
+  }
+
+  private converterStringsParaDatas(lancamentos:Lancamento[]){
+    
+  }
+
+
 
 }

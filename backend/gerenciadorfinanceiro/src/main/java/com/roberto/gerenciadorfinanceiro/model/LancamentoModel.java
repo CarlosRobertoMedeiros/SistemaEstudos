@@ -23,12 +23,12 @@ public class LancamentoModel {
 
     @Column(name = "data_vencimento")
     @NotNull
-    //@JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataVencimento;
 
     @Column(name = "data_pagamento")
     @NotNull
-    //@JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPagamento;
 
     @NotNull
@@ -117,6 +117,10 @@ public class LancamentoModel {
 
     public void setPessoa(PessoaModel pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     @Override
