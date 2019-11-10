@@ -3,11 +3,11 @@
         <div class="ui-g">
             
             <div class="ui-g-12">
-                <h1>Novo Lançamento</h1>
+                <h1>{{ editando ? 'Edição de ' : 'Novo' }} Lançamento</h1>
             </div><!--ui-g-12-->
 
             <div class="ui-g-12">
-                <p-selectButton [options]="tipos" [(ngModel)]="lancamento.tipo" name="tipos" #tipo></p-selectButton>
+                <p-selectButton name="tipo" [options]="tipos" [(ngModel)]="lancamento.tipo"  #tipo></p-selectButton>
             </div><!--ui-g-12-->
 
             <div class="ui-g-6 ui-md-3 ui-fluid"><!--Data de Vencimento-->
@@ -26,7 +26,8 @@
 
             <div class="ui-g-6 ui-md-3 ui-fluid"><!--Data de Recebimento-->
                 <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
-                <p-calendar dateFormat="dd/mm/yy" [(ngModel)]="lancamento.dataPagamento" name="valorTipo"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" [inline]="false" [readonlyInput]="false" [showIcon]="false" 
+                    name="pagamento" ngModel #pagamento="ngModel" [(ngModel)]="lancamento.dataPagamento" (onSelect)="onSelectMethod($event)"></p-calendar>
             </div><!--Fim da Data de Recebimento-->
 
             <div class="ui-g-12 ui-md-9 ui-fluid"><!-- Descrição -->

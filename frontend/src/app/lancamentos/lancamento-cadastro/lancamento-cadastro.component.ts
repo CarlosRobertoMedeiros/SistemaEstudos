@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, ToastrComponentlessModule } from 'ngx-toastr';
 
 import { CategoriaService } from 'src/app/categoria/categoria.service';
 import { PessoaService } from 'src/app/pessoas/pessoa.service';
@@ -38,13 +38,47 @@ export class LancamentoCadastroComponent implements OnInit {
               private route:ActivatedRoute) { }
 
   ngOnInit() {
-    //console.log(this.route.snapshot.params['codigo']); //Retorna o Código
+    const codigoLancamento = this.route.snapshot.params['codigo'];
+    if (codigoLancamento){
+      this.carregarLancamento(codigoLancamento);//Para Edição
+    }
     
     this.carregarCategorias();
     this.carregarPessoas();
   }
 
+  get editando(){
+    return Boolean(this.lancamento.codigo); //Existindo Código está editando
+  }
+
+  carregarLancamento(codigo:number){
+    this.lancamentoService.buscarPorCodigo(codigo)
+      .then(lancamento =>{
+        this.lancamento = lancamento;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+
+  }
+
   salvar(form:FormControl){
+    if (this.editando){
+      this.atualizarLancamento(form)
+    }else{
+      this.adicionarLancamento(form)
+    }
+  }
+
+  atualizarLancamento(form:FormControl){
+    this.lancamentoService.atualizar(this.lancamento)
+      .then(lancamento =>{
+        this.lancamento = lancamento;
+
+        this.toasty.success('Lançamento Alterado com Sucesso !');
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  adicionarLancamento(form:FormControl){
     return this.lancamentoService.adicionar(this.lancamento)
       .then(()=>{
           form.reset();
@@ -70,5 +104,13 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
+  onSelectMethod(event){
+    console.log(event);
+    /*let formattedDate = $filter('date')event, 'dd/MM/yyyy');
+    let d = new Date(Date.parse(event));
+    console.log("d"+d);
+    console.log(`${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`);*/
+
+  }
 
 }

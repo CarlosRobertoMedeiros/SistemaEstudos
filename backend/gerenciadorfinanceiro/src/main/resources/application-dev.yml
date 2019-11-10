@@ -35,19 +35,8 @@ spring:
     hibernate:
       ddl-auto: update
 
-  #jackson:
-  #  date-format: "YYYY-MM-dd"
-  #  serialization:
-  #    write_dates_as_timestamps: false
   jackson:
-    date-format: "dd/MM/yyyy"
-
-
-
-
-
-
-
+    date-format: yyyy-MM-dd
 
 #  spring.jackson.deserialization.fail-on-unknown-properties=true
 

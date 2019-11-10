@@ -1,4 +1,5 @@
 //Dados do Locale
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { LancamentoService } from '../lancamentos/lancamento.service';
@@ -6,7 +7,6 @@ import { ConfirmationService } from 'primeng/components/common/api';
 registerLocaleData(localePt);
 
 
-import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ToastrModule } from 'ngx-toastr';
@@ -44,7 +44,7 @@ import { RouterModule } from '@angular/router';
     ErrorHandlerService,
     
     ConfirmationService,
-    { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: LOCALE_ID, useValue: 'pt' }
   ]
 
 })

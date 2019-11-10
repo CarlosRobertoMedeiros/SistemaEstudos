@@ -1,16 +1,21 @@
 package com.roberto.gerenciadorfinanceiro;
 
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.roberto.gerenciadorfinanceiro.config.property.GerenciadorFinanceiroApiProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.time.format.DateTimeFormatter;
 
 /**
  * TODO: Perfil Basic Criado atrabés do Spring Security
@@ -69,6 +74,7 @@ public class GerenciadorfinanceiroApplication {
                 env.getProperty("spring.datasource.username"),
                 env.getProperty("spring.datasource.password"));
     }
+
 
     /*@Override
     public void afterPropertiesSet() throws Exception {

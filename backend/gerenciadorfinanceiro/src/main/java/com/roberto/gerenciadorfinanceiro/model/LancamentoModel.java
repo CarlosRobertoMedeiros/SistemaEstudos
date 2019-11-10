@@ -2,8 +2,7 @@ package com.roberto.gerenciadorfinanceiro.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -23,12 +22,11 @@ public class LancamentoModel {
 
     @Column(name = "data_vencimento")
     @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataVencimento;
 
     @Column(name = "data_pagamento")
-    @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPagamento;
 
     @NotNull

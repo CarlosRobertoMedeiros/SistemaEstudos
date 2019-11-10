@@ -79,8 +79,8 @@
                 <tr>
                     <td>{{lanc.pessoa}}</td>
                     <td>{{lanc.descricao}}</td>
-                    <td><span>{{ lanc.dataVencimento | date:'dd/MM/yyyy' }}</span></td>
-                    <td><span>{{ lanc.dataPagamento | date:'dd/MM/yyyy' }}</span></td>
+                    <td><span>{{ lanc.dataVencimento }}</span></td>
+                    <td><span>{{ lanc.dataPagamento }}</span></td>
                     <td><span [style.color]="lanc.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lanc.valor | number:'1.2-2' }}</span></td>
                     <td>
                         <a style="margin-right:2px" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
