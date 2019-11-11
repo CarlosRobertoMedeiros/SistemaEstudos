@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { LancamentoService, LancamentoFiltro } from '../lancamento.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -24,9 +25,11 @@ export class LancamentosPesquisaComponent implements OnInit {
   constructor(private lancamentoService:LancamentoService,
               private errorHandler:ErrorHandlerService,
               private toasty:ToastrService,
-              private confirmation:ConfirmationService){}
+              private confirmation:ConfirmationService,
+              private title:Title){}
 
   ngOnInit(){
+    this.title.setTitle('Pesquisa de Lançamentos');
     
   }
 

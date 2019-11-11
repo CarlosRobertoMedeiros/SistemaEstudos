@@ -16,7 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { RouterModule } from '@angular/router';
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 
 
 
@@ -29,7 +29,6 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
     
     InputTextModule,
     InputTextareaModule,
@@ -39,12 +38,11 @@ import { RouterModule } from '@angular/router';
     TableModule,
     TooltipModule,
     CurrencyMaskModule,
-    SharedModule
+    
+    SharedModule,
+    LancamentosRoutingModule
   ],
 
-  exports:[
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
-  ]
+  exports:[]
 })
 export class LancamentosModule { }

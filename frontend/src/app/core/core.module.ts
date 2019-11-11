@@ -16,12 +16,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorHandlerService } from './error-handler.service';
 import { PessoaService } from '../pessoas/pessoa.service';
 import { RouterModule } from '@angular/router';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import { Title } from '@angular/platform-browser';
 
 
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    PaginaNaoEncontradaComponent
   ],
 
   imports: [
@@ -44,6 +47,7 @@ import { RouterModule } from '@angular/router';
     ErrorHandlerService,
     
     ConfirmationService,
+    Title,
     { provide: LOCALE_ID, useValue: 'pt' }
   ]
 

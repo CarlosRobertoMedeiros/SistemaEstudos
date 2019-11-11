@@ -15,6 +15,7 @@ import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.co
 
 
 import { SharedModule } from '../shared/shared.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
@@ -32,12 +33,10 @@ import { SharedModule } from '../shared/shared.module';
     InputTextareaModule,
     ButtonModule,
 
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
 
-  exports:[
-    PessoaCadastroComponent,
-    PessoasPesquisaComponent
-  ]
+  exports:[]
 })
 export class PessoasModule { }

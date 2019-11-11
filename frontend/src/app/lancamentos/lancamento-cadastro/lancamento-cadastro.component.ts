@@ -10,7 +10,8 @@ import { LancamentoService } from '../lancamento.service';
 import { Lancamento } from 'src/app/core/model';
 
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -35,9 +36,14 @@ export class LancamentoCadastroComponent implements OnInit {
               private lancamentoService:LancamentoService,
               private toasty:ToastrService,
               private errorHandler:ErrorHandlerService,
-              private route:ActivatedRoute) { }
+              private route:ActivatedRoute,
+              private router:Router,
+              private title:Title) { }
 
   ngOnInit() {
+    
+    this.title.setTitle('Novo lançamento');
+    
     const codigoLancamento = this.route.snapshot.params['codigo'];
     if (codigoLancamento){
       this.carregarLancamento(codigoLancamento);//Para Edição
@@ -55,6 +61,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.buscarPorCodigo(codigo)
       .then(lancamento =>{
         this.lancamento = lancamento;
+        this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
 
@@ -72,7 +79,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.atualizar(this.lancamento)
       .then(lancamento =>{
         this.lancamento = lancamento;
-
+        this.atualizarTituloEdicao();
         this.toasty.success('Lançamento Alterado com Sucesso !');
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -80,10 +87,9 @@ export class LancamentoCadastroComponent implements OnInit {
 
   adicionarLancamento(form:FormControl){
     return this.lancamentoService.adicionar(this.lancamento)
-      .then(()=>{
-          form.reset();
-          this.toasty.success('Lançamento Adicionado com Sucesso !');
-          this.lancamento = new Lancamento();
+      .then((lancamentoAdicionado)=>{
+          this.toasty.success('Lançamento Adicionado com Sucesso !');  
+          this.router.navigate(['/lancamentos',lancamentoAdicionado.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -106,10 +112,29 @@ export class LancamentoCadastroComponent implements OnInit {
 
   onSelectMethod(event){
     console.log(event);
+    
     /*let formattedDate = $filter('date')event, 'dd/MM/yyyy');
     let d = new Date(Date.parse(event));
     console.log("d"+d);
     console.log(`${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`);*/
+
+  }
+
+  novo(form:FormControl){
+    form.reset();
+
+    //Esse setTimeout é apenas um WorkArround = Gambiarra
+    //Devido a limitações do form.reset() do angular
+    //Pois perdeu a referência. o form.reset() perdeu tudo
+    setTimeout(function(){
+      this.lancamento = new Lancamento();
+    }.bind(this),1);
+    this.router.navigate(['/lancamentos/novo']);  
+
+  }
+
+  atualizarTituloEdicao(){
+    this.title.setTitle(`Edição de lancamento: ${this.lancamento.descricao}`);
 
   }
 
