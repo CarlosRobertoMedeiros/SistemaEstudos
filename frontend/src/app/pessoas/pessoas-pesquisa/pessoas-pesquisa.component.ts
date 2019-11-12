@@ -1,16 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/api';
 
 import { PessoaService, PessoaFiltro } from '../pessoa.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
   templateUrl: './pessoas-pesquisa.component.html',
   styleUrls: ['./pessoas-pesquisa.component.css']
 })
-export class PessoasPesquisaComponent {
+export class PessoasPesquisaComponent implements OnInit {
   
   totalRegistros =0;
   filtro = new PessoaFiltro();
@@ -20,8 +21,14 @@ export class PessoasPesquisaComponent {
   constructor(private pessoaService:PessoaService,
               private errorHandler:ErrorHandlerService,
               private toasty:ToastrService,
-              private confirmation:ConfirmationService){};
+              private confirmation:ConfirmationService,
+              private title:Title){};
 
+  ngOnInit(){
+    this.title.setTitle('Pesquisa de Pessoas');
+  }
+   
+              
   pesquisar(pagina=0){
     this.filtro.pagina = pagina;
     //console.log(JSON.stringify(this.filtro)); //Verifico o que estou passando no json
@@ -29,7 +36,8 @@ export class PessoasPesquisaComponent {
       .then(resultado =>{
         this.totalRegistros = resultado.total;
         this.pessoas = resultado.pessoas;
-      });
+      }).
+      catch(erro => this.errorHandler.handle(erro));
   }
 
   aoMudarPagina(event:LazyLoadEvent){

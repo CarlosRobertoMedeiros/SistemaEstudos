@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/pessoas")
@@ -46,6 +47,15 @@ public class PessoaResource {
         return pessoaRepository.filtrar(pessoaFilter,pageable);
     }*/
 
+    @GetMapping("{codigo}")
+    public ResponseEntity<?> listarPorCodigo(@PathVariable Long codigo){
+        Optional<PessoaModel> pessoa = pessoaRepository.findById(codigo);
+
+        if (pessoa.isPresent())
+            return ResponseEntity.ok(pessoa);
+
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping(params = "listar")
     public Page<PessoaModel> ListarComFiltro(PessoaFilter pessoaFilter, Pageable pageable){
@@ -70,6 +80,18 @@ public class PessoaResource {
 
         publisher.publishEvent(new RecursoCriadoEvent(this, resp, pessoaSalva.getCodigo()));
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
+    }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<PessoaModel> atualizar(@RequestBody PessoaModel pessoa,
+                                                     @PathVariable long codigo) {
+
+        PessoaModel pessoaModel = pessoaService.atualizar(codigo, pessoa);
+
+        if (pessoaModel == null)
+            return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok().body(pessoaModel);
     }
 
 

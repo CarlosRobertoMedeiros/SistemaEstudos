@@ -27,4 +27,11 @@ public class PessoaService {
         }
         return pessoaSalva;
     }
+
+    public PessoaModel atualizar(long codigo, PessoaModel pessoa) {
+        PessoaModel pessoaSalva = buscarPeloCodigo(codigo);
+        //TODO: Tem que Implementar a consulta de pessoa e categoria antes da atualização
+        pessoa.setCodigo(pessoaSalva.getCodigo());
+        return pessoaRepository.save(pessoa);
+    }
 }

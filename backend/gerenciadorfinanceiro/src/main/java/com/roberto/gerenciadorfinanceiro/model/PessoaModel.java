@@ -49,6 +49,10 @@ public class PessoaModel {
         this.endereco = endereco;
     }
 
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

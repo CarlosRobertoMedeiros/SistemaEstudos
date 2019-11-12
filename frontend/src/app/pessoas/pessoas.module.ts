@@ -15,7 +15,7 @@ import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.co
 
 
 import { SharedModule } from '../shared/shared.module';
-import { AppRoutingModule } from '../app-routing.module';
+import { PessoasRoutingModule } from './pessoas-routing.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { AppRoutingModule } from '../app-routing.module';
     ButtonModule,
 
     SharedModule,
-    AppRoutingModule
+    PessoasRoutingModule
   ],
 
   exports:[]
