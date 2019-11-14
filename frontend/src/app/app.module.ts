@@ -15,9 +15,7 @@ import { CoreModule } from './core/core.module';
 
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
-import { RouterModule } from '@angular/router';
-
-
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +33,7 @@ import { RouterModule } from '@angular/router';
     CoreModule,
     LancamentosModule,
     PessoasModule,
+    SegurancaModule,
     AppRoutingModule //Vai ter que usar depois de lancamento Módulo, rota sempre depois do módulo
 ],
   
