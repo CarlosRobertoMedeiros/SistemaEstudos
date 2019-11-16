@@ -7,8 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration  //Comentado devido a utilização do adaptador de Segurança
+//@EnableWebSecurity //Comentado devido a atualização do adaptador de segurança
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
