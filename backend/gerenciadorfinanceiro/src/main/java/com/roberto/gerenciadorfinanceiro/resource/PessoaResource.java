@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,7 @@ public class PessoaResource {
     //TODO: Reimplementar o ListarTodos retornando uma paginação, evitando as consultas baseadas em eager
 //    Antes a API era assim
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
     public ResponseEntity<Object> ListarTodas(){
         List<PessoaModel> pessoas = pessoaRepository.findAll();
         if (pessoas.isEmpty()){
@@ -48,6 +50,7 @@ public class PessoaResource {
     }*/
 
     @GetMapping("{codigo}")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
     public ResponseEntity<?> listarPorCodigo(@PathVariable Long codigo){
         Optional<PessoaModel> pessoa = pessoaRepository.findById(codigo);
 
@@ -63,18 +66,21 @@ public class PessoaResource {
     }
 
     @DeleteMapping("{codigo}")
+    @PreAuthorize("hasAuthority('ROLE_REMOVER_PESSOA') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long codigo){
         pessoaRepository.deleteById(codigo);
     }
 
     @PutMapping("/{codigo}/ativo")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void atualizar(@PathVariable Long codigo, @RequestBody boolean ativo){
         pessoaService.atuallizarPropriedadeAtiva(codigo,ativo);
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
     public ResponseEntity<PessoaModel> criar(@RequestBody PessoaModel pessoa, HttpServletResponse resp){
         PessoaModel pessoaSalva = pessoaRepository.save(pessoa);
 
@@ -83,6 +89,7 @@ public class PessoaResource {
     }
 
     @PutMapping("/{codigo}")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
     public ResponseEntity<PessoaModel> atualizar(@RequestBody PessoaModel pessoa,
                                                      @PathVariable long codigo) {
 

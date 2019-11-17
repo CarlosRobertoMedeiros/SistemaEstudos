@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -18,6 +19,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Override
@@ -25,11 +29,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         //Conexão do Cliente
         clients.inMemory()
                 .withClient("angular")
-                .secret("angular")
+                .secret("$2a$10$dt6jhHj8LM3a9qQO77svK.MLd9wFeRlMcGHEc2iHYPTzlEhtb75wK") //angular
                 .scopes("read", "write")
                 .authorizedGrantTypes("password","refresh_token") // Atualização do token, falta colocar em um cookie seguro
                 .accessTokenValiditySeconds(30) //30 segundos
+                .refreshTokenValiditySeconds(3600*24) // 1 Dia
+            .and()
+                .withClient("mobile")//Para o Cliente Mobile só posso realizar a leitura
+                .secret("$2a$10$dt6jhHj8LM3a9qQO77svK.MLd9wFeRlMcGHEc2iHYPTzlEhtb75wK") //angular
+                .scopes("read")
+                .authorizedGrantTypes("password","refresh_token") // Atualização do token, falta colocar em um cookie seguro
+                .accessTokenValiditySeconds(30) //30 segundos
                 .refreshTokenValiditySeconds(3600*24); // 1 Dia
+
     }
 
     @Override
@@ -38,6 +50,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .tokenStore(tokenStore())
             .accessTokenConverter(accessTokenConverter())
             .reuseRefreshTokens(false)
+            .userDetailsService(userDetailsService)
             .authenticationManager(authenticationManager);
     }
 
@@ -52,6 +65,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public TokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());
     }
-//10:43
-//6.5. Configurando JWT no projeto - 04:05
 }

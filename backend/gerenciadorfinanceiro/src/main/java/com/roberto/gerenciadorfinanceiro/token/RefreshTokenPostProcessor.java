@@ -1,5 +1,7 @@
 package com.roberto.gerenciadorfinanceiro.token;
 
+import com.roberto.gerenciadorfinanceiro.config.property.GerenciadorFinanceiroApiProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -19,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 @ControllerAdvice
 public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken> {
 
+    @Autowired
+    GerenciadorFinanceiroApiProperty gerenciadorFinanceiroApiProperty;
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         return returnType.getMethod().getName().equals("postAccessToken");
@@ -47,7 +51,7 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
     private void adicionarRefreshTokenNoCookie(String refreshToken, HttpServletRequest req, HttpServletResponse resp) {
         Cookie refreshTokenCookie = new Cookie("refreshToken",refreshToken);
         refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setSecure(false); //TODO: True em Prod
+        refreshTokenCookie.setSecure(gerenciadorFinanceiroApiProperty.getSeguranca().isEnableHttps());
         refreshTokenCookie.setPath(req.getContextPath()+"/oauth/token");
         refreshTokenCookie.setMaxAge(25920000); // 1 mês
         resp.addCookie(refreshTokenCookie);
