@@ -9,14 +9,13 @@ import { AuthService } from '../auth.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private auth:AuthService) { }
+  constructor(private authService:AuthService) { }
 
   ngOnInit() {
   }
 
   login(usuario:string , senha:string){
-    this.login(usuario,senha);
-
+    this.authService.login(usuario,senha);
   }
 
 }
