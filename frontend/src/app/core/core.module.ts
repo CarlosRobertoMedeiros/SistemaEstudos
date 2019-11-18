@@ -5,13 +5,11 @@ import localePt from '@angular/common/locales/pt';
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { ConfirmationService } from 'primeng/components/common/api';
 registerLocaleData(localePt);
-
-
 import { CommonModule } from '@angular/common';
 
 import { ToastrModule } from 'ngx-toastr';
-import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
 
+import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
 import { AuthService } from '../seguranca/auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorHandlerService } from './error-handler.service';
@@ -25,7 +23,8 @@ import { Title } from '@angular/platform-browser';
 @NgModule({
   declarations: [
     NavbarComponent,
-    PaginaNaoEncontradaComponent
+    PaginaNaoEncontradaComponent,
+
   ],
 
   imports: [
@@ -33,7 +32,7 @@ import { Title } from '@angular/platform-browser';
     RouterModule,
     
     ToastrModule.forRoot(), // ToastrModule added
-    ConfirmDialogModule,
+    ConfirmDialogModule
 
   ],
 

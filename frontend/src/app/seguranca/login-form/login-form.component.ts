@@ -1,5 +1,7 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 
 
 @Component({
@@ -9,13 +11,22 @@ import { AuthService } from '../auth.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,
+              private erroHandler:ErrorHandlerService,
+              private router:Router) { }
+              
 
   ngOnInit() {
   }
 
   login(usuario:string , senha:string){
-    this.authService.login(usuario,senha);
+    this.authService.login(usuario,senha)
+      .then(()=>{
+        this.router.navigate(['/lancamentos']);
+      })
+      .catch(erro =>{
+        this.erroHandler.handle(erro);
+      });
   }
 
 }

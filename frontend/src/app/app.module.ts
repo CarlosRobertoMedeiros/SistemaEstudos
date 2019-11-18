@@ -35,6 +35,7 @@ import { SegurancaModule } from './seguranca/seguranca.module';
     PessoasModule,
     SegurancaModule,
     AppRoutingModule //Vai ter que usar depois de lancamento Módulo, rota sempre depois do módulo
+
 ],
   
   bootstrap: [AppComponent]
