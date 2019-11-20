@@ -21,9 +21,7 @@ export class PessoaService {
   constructor(private http:HttpClient) { }
 
   pesquisar(filtro:PessoaFiltro):Promise<any>{
-    //console.log("Estou na pessoa service "+JSON.stringify(filtro));
-    
-    let headers = new HttpHeaders().append('Authorization','Basic YWRtaW46YWRtaW4=');
+
     let params = new HttpParams();
 
     params = params.set('page',filtro.pagina.toString());   
@@ -33,7 +31,7 @@ export class PessoaService {
       params = params.set('nome',filtro.nome);   
     }
 
-    return this.http.get(`${this.pessoasUrl}?listar` , {headers,params})
+    return this.http.get<any>(`${this.pessoasUrl}?listar` , {params})
       .toPromise()
       .then(response =>{
          const pessoas = response['content']

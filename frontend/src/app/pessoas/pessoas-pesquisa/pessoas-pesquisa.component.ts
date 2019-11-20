@@ -31,7 +31,7 @@ export class PessoasPesquisaComponent implements OnInit {
               
   pesquisar(pagina=0){
     this.filtro.pagina = pagina;
-    //console.log(JSON.stringify(this.filtro)); //Verifico o que estou passando no json
+    
     this.pessoaService.pesquisar(this.filtro)
       .then(resultado =>{
         this.totalRegistros = resultado.total;

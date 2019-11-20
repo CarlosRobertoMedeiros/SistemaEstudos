@@ -26,7 +26,6 @@ export class LancamentoService {
 
   pesquisar(filtro:LancamentoFiltro):Promise<any>{
 
-    //let headers = new HttpHeaders().append('Authorization','Basic YWRtaW46YWRtaW4=');
     let params = new HttpParams();
 
     params = params.set('page',filtro.pagina.toString());   
@@ -44,18 +43,16 @@ export class LancamentoService {
     if (filtro.dataVencimentoFim){
       params = params.set('dataVencimentoAte',  moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));   
     }
-    console.log("Cheguei");
-    //Retornando o Objeto Paginado, devolvendo informações de paginação
-    return this.http.get(`${this.lancamentosUrl}`)
+    
+    return this.http.get<any>(`${this.lancamentosUrl}?resumo`, {params})
       .toPromise()
-      .then(response => {
-        //console.log("Aqui =>"+JSON.stringify(response['content']));
+      .then(response =>{
         const lancamentos = response['content']
         const resultado = {
           lancamentos,
           total:response['totalElements']
         }
-        return response;
+        return resultado;
       });
   }
 
