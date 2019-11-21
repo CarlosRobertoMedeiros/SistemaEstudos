@@ -19,11 +19,14 @@ export class AuthService {
 
   login(usuario:string, senha:string):Promise<void>{
     
+    
     const headers = new HttpHeaders({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
                                     'Authorization': 'Basic '+btoa("angular:angular")});
-
+    //TODO: Implementar mudança para saber se o sistema veio de um pc ou um cel
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
+
+    console.log(body);
    
     return this.http.post(this.oauthTokenUrl, body, {headers})
       .toPromise()

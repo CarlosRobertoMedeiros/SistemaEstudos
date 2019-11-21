@@ -44,58 +44,46 @@ export class PessoaService {
   }
 
   listarTodas():Promise<any>{
-    let headers = new HttpHeaders().append('Authorization','Basic YWRtaW46YWRtaW4=');
-
-    return this.http.get(this.pessoasUrl, {headers})
+     return this.http.get(this.pessoasUrl)
       .toPromise()
       .then();
   }
 
   excluir(codigo:any):Promise<void> {
     
-    let headers = new HttpHeaders().append('Authorization','Basic YWRtaW46YWRtaW4=');
-    
-    return this.http.delete(`${this.pessoasUrl}/${codigo}` , {headers})
+     return this.http.delete(`${this.pessoasUrl}/${codigo}`)
       .toPromise()
       .then(()=>null);
   }
 
   mudarStatus(codigo:any,novoStatus:boolean):Promise<void>{
 
-      let headers = new HttpHeaders()
-        .append('Authorization','Basic YWRtaW46YWRtaW4=')
-        .append('Content-Type','application/json');  
-      
-      return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, novoStatus , {headers})
+    let headers = new HttpHeaders().append('Content-Type','application/json');
+    
+      return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, novoStatus, {headers})
         .toPromise()
         .then(()=>null);
   }
 
   adicionar(pessoa:Pessoa):Promise<Pessoa>{
-    let headers = new HttpHeaders()
-      .append('Authorization','Basic YWRtaW46YWRtaW4=')
-      .append('Content-Type','application/json');
 
-      return this.http.post(this.pessoasUrl,JSON.stringify(pessoa) ,{headers})
+    let headers = new HttpHeaders().append('Content-Type','application/json');
+
+      return this.http.post(this.pessoasUrl,JSON.stringify(pessoa), {headers})
         .toPromise()
         .then();
   }
 
   buscarPorCodigo(codigo:number):Promise<Pessoa>{
-      let headers = new HttpHeaders()
-        .append('Authorization','Basic YWRtaW46YWRtaW4=');
-
-        return this.http.get(`${this.pessoasUrl}/${codigo}`, {headers})
+        return this.http.get(`${this.pessoasUrl}/${codigo}`)
           .toPromise()
           .then();
   }
 
   atualizar(pessoa:Pessoa):Promise<Pessoa>{
     
-    let headers = new HttpHeaders()
-      .append('Authorization','Basic YWRtaW46YWRtaW4=')
-      .append('Content-Type','application/json');
-      
+    let headers = new HttpHeaders().append('Content-Type','application/json');
+
       return this.http.put(`${this.pessoasUrl}/${pessoa.codigo}`,JSON.stringify(pessoa),{headers})
         .toPromise()
         .then();

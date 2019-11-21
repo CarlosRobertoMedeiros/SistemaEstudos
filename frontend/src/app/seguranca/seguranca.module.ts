@@ -11,7 +11,6 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { FormsModule } from '@angular/forms';
 
 export function tokenGetter(): string {
-  console.log("Token =>"+localStorage.getItem("token"))
   return localStorage.getItem("token");
 }
 

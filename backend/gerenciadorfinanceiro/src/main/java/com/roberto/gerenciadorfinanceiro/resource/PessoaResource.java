@@ -61,6 +61,7 @@ public class PessoaResource {
     }
 
     @GetMapping(params = "listar")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
     public Page<PessoaModel> ListarComFiltro(PessoaFilter pessoaFilter, Pageable pageable){
         return pessoaRepository.filtrar(pessoaFilter,pageable);
     }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import * as moment from 'moment';
 import 'moment/locale/pt-br'
 import { Lancamento } from '../core/model';
@@ -58,20 +58,18 @@ export class LancamentoService {
 
   excluir(codigo:number):Promise<void>{
     
-    let headers = new HttpHeaders().append('Authorization','Basic YWRtaW46YWRtaW4=');
     let params = new HttpParams();
 
-    return this.http.delete(`${this.lancamentosUrl}/${codigo}`,{headers})
+    return this.http.delete(`${this.lancamentosUrl}/${codigo}`,{params})
       .toPromise()
       .then(()=>null);
   }
 
   adicionar(lancamento:Lancamento):Promise<Lancamento>{
-    let headers = new HttpHeaders()
-      .append('Authorization','Basic YWRtaW46YWRtaW4=')
-      .append('Content-Type','application/json');
+    
+    let headers = new HttpHeaders().append('Content-Type','application/json');
 
-      return this.http.post(this.lancamentosUrl,JSON.stringify(lancamento) ,{headers})
+      return this.http.post(this.lancamentosUrl,JSON.stringify(lancamento), {headers})
         .toPromise()
         .then(response =>{
           const lancamentoInserido = response as Lancamento;
@@ -83,11 +81,9 @@ export class LancamentoService {
 
   atualizar(lancamento:Lancamento):Promise<Lancamento>{
     
-    let headers = new HttpHeaders()
-      .append('Authorization','Basic YWRtaW46YWRtaW4=')
-      .append('Content-Type','application/json');
-      
-      return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`,JSON.stringify(lancamento),{headers})
+    let headers = new HttpHeaders().append('Content-Type','application/json');
+
+    return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`,JSON.stringify(lancamento), {headers})
         .toPromise()
         .then(response =>{
           const lancamentoAlterado = response as Lancamento;
@@ -97,12 +93,9 @@ export class LancamentoService {
   }
 
   buscarPorCodigo(codigo:number):Promise<Lancamento>{
-    let headers = new HttpHeaders()
-      .append('Authorization','Basic YWRtaW46YWRtaW4=');
-
-    return this.http.get(`${this.lancamentosUrl}/${codigo}`,{headers})
+    
+    return this.http.get(`${this.lancamentosUrl}/${codigo}`)
       .toPromise()
-      //.then();
       .then(response =>{
         const lancamento = response as Lancamento;
         this.converterStringsParaDatas([lancamento]);
