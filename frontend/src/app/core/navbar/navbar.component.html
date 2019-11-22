@@ -4,15 +4,19 @@
         <div class="ui-g">
             <div class="ui-g-12">
                 <a href="javascript:;" class="navbar-toogle" (click)="exibindoMenu =! exibindoMenu"><i class="pi pi-bars"></i></a>
+                <button type="button" (click)="criarNovoAccessToken()">Novo Access Token</button>
             </div>
         </div>
     </div>
 
 
+    <!--Testei e posso esconder tudo de acordo com os valores do payLoad-->
     <ul class="navbar-menu" [hidden]="!exibindoMenu">
         <li class="navbar-usuario">{{ auth.jwtPayLoad?.user_name}}</li>
-        <li class="navbar-menuitem" routerLinkActive="ativo" ><a routerLink="/lancamentos">Lançamentos</a></li>
-        <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/pessoas">Pessoas</a></li>
+        <li class="navbar-menuitem" routerLinkActive="ativo" 
+            *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')" ><a routerLink="/lancamentos">Lançamentos</a></li>
+        <li class="navbar-menuitem" routerLinkActive="ativo"
+            *ngIf="auth.temPermissao('ROLE_PESQUISAR_PESSOA')"><a routerLink="/pessoas">Pessoas</a></li>
         <li class="navbar-menuitem"><a href="#">Logout</a></li>
     </ul>
         

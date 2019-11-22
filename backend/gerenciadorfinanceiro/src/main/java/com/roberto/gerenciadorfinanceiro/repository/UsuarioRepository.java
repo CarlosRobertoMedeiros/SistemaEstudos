@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     public Optional<Usuario> findByEmail(String email);
+    public Optional<Usuario> findByNome(String nome);
 }
 
 //Continuar de 08:25 -> 6.11. Movendo o usuário para o banco de dados
