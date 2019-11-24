@@ -83,6 +83,14 @@ export class AuthService {
 
   }
 
+  
+  isAccessTokenValido(){
+    let token = localStorage.getItem('token');
+    return !token || this.jwtHelperService.isTokenExpired(token);
+  }
+  
+  
+  
   private armazenarToken(token:string){
     this.jwtPayLoad = this.jwtHelperService.decodeToken(token);
     localStorage.setItem('token',token); //Armazena no browser do usuário
@@ -95,4 +103,8 @@ export class AuthService {
       this.armazenarToken(token);
     }
   }
+
+
+
+
 }

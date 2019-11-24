@@ -3,6 +3,7 @@ import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/ap
 
 import { stringify } from '@angular/compiler/src/util';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/seguranca/auth.service';
 
 import { LancamentoService, LancamentoFiltro } from '../lancamento.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
@@ -23,6 +24,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   @ViewChild('tabela', {static: true}) grid;
 
   constructor(private lancamentoService:LancamentoService,
+              private auth:AuthService,
               private errorHandler:ErrorHandlerService,
               private toasty:ToastrService,
               private confirmation:ConfirmationService,

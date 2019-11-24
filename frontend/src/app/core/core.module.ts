@@ -17,6 +17,7 @@ import { PessoaService } from '../pessoas/pessoa.service';
 import { RouterModule } from '@angular/router';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { Title } from '@angular/platform-browser';
+import { PaginaNaoAutorizadaComponent } from './pagina-nao-autorizada/pagina-nao-autorizada.component';
 
 
 
@@ -24,7 +25,7 @@ import { Title } from '@angular/platform-browser';
   declarations: [
     NavbarComponent,
     PaginaNaoEncontradaComponent,
-
+    PaginaNaoAutorizadaComponent
   ],
 
   imports: [
