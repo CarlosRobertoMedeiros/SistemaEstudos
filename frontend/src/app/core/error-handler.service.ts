@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { JsonPipe } from '@angular/common';
 
+import { Router } from '@angular/router';
+
+import { NotAutenticatedError } from '../seguranca/money-http-interceptor';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorHandlerService {
 
-  constructor(private toasty:ToastrService) { }
+  constructor(private toasty:ToastrService, 
+              private router:Router) { }
   
   handle(errorResponse:any){
     let msg:string;
@@ -15,7 +20,13 @@ export class ErrorHandlerService {
     if (typeof errorResponse==='string'){
       msg = errorResponse;
     }
-  
+    //Esse else if é uma técnica legal de retornar o Erro de Autenticação
+    //Serve para trabalhar com o refreshToken
+    else if (errorResponse instanceof NotAutenticatedError){
+      msg = "Sua sessão expirou !!!";
+      this.router.navigate(['/login']);
+    }
+    
     else if (errorResponse.status >= 400 && errorResponse.status <= 499) {
         let errors;
         msg = 'Ocorreu um erro ao processar a sua solicitação';

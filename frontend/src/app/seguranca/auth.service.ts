@@ -3,21 +3,39 @@ import { HttpClient , HttpHeaders } from '@angular/common/http';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { stringify } from 'querystring';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  oauthTokenUrl ='http://localhost:9000/oauth/token';
+  oauthTokenUrl : string;
+  tokensRevokeUrl : string;
+
   jwtPayLoad: any;
 
   constructor(private http: HttpClient,
               private jwtHelperService:JwtHelperService ) { 
+                
+                this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
+                this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
+                
                 this.carregarToken();
               }
-
-  login(usuario:string, senha:string):Promise<void>{
+  
+    //O logout apenas limpa o refreshToken
+    //E dando tudo certo, ele chama o limparAcessToken
+    logout(){
+      return this.http.delete(this.tokensRevokeUrl, {withCredentials:true})
+        .toPromise()
+        .then(()=>{
+          this.limparAcessToken();
+        })
+    }              
+  
+    
+    login(usuario:string, senha:string):Promise<void>{
     
     
     const headers = new HttpHeaders({'Content-type': 'application/x-www-form-urlencoded',
@@ -83,10 +101,23 @@ export class AuthService {
 
   }
 
-  
+  limparAcessToken(){
+    localStorage.removeItem('token');
+    this.jwtPayLoad=null;
+  }
+
   isAccessTokenValido(){
     let token = localStorage.getItem('token');
     return !token || this.jwtHelperService.isTokenExpired(token);
+  }
+
+  temQualquerPermissao(roles){
+    for (let role of roles){
+      if (this.temPermissao(role)) {
+        return true;
+      } 
+    }
+    return false;
   }
   
   

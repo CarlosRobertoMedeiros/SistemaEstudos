@@ -7,8 +7,8 @@ import { PaginaNaoAutorizadaComponent } from './core/pagina-nao-autorizada/pagin
 
 const routes: Routes = [
   {path:'',redirectTo:'lancamentos', pathMatch:'full'},
+  {path:'app-pagina-nao-autorizada',component:PaginaNaoAutorizadaComponent},
   {path:'pagina-nao-encontrada',component:PaginaNaoEncontradaComponent},
-  {path:'pagina-nao-autorizada',component:PaginaNaoAutorizadaComponent},
   {path:'**',redirectTo:'pagina-nao-encontrada'}//Tem que ficar por ultimo pois caso não acesse nada redireciona aqui
 ];
 

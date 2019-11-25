@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { AuthService } from 'src/app/seguranca/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,13 +9,27 @@ import { AuthService } from 'src/app/seguranca/auth.service';
 })
 export class NavbarComponent{
 
-  constructor (private auth:AuthService){
+  exibindoMenu = false;
+  
+
+  constructor (public auth:AuthService,
+               private errorHandler:ErrorHandler,
+               private router:Router ){
     
   }
 
   criarNovoAccessToken(){
     this.auth.obterNovoAccessToken();
   }
+
+  logout(){
+    this.auth.logout()
+      .then(()=>{
+        this.router.navigate(['/login']);
+      })
+      .catch(erro =>this.errorHandler.handleError(erro));
+  }
+
   
 
 }
