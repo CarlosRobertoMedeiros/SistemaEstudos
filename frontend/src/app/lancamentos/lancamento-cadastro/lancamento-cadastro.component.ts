@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 
+
 @Component({
   selector: 'app-lancamento-cadastro',
   templateUrl: './lancamento-cadastro.component.html',
@@ -38,7 +39,9 @@ export class LancamentoCadastroComponent implements OnInit {
               private errorHandler:ErrorHandlerService,
               private route:ActivatedRoute,
               private router:Router,
-              private title:Title) { }
+              private title:Title) { 
+
+              }
 
   ngOnInit() {
     
@@ -90,6 +93,8 @@ export class LancamentoCadastroComponent implements OnInit {
       .then((lancamentoAdicionado)=>{
           this.toasty.success('Lançamento Adicionado com Sucesso !');  
           this.router.navigate(['/lancamentos',lancamentoAdicionado.codigo]);
+          console.log("url =>"+this.lancamentoService.lancamentosUrl+"lancAdicionado"+lancamentoAdicionado.codigo);
+          //his.router.navigate([this.lancamentoService.lancamentosUrl,lancamentoAdicionado.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
