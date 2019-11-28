@@ -61,32 +61,32 @@
           
         
         <p-table [value]="lancamentos" [responsive]="true"
-          emptyMessage="Nenhum lançamento encontrado"
           [paginator]="true" [rows]="filtro.itensPorPagina"
           [lazy]="true" [totalRecords]="totalRegistros"
           (onLazyLoad)="aoMudarPagina($event)" #tabela>
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Pessoa</th>
-                    <th>Descricao</th>
-                    <th>Data Vencimento</th>
-                    <th>Data Pagamento</th>
-                    <th>Valor</th>
-                    <th>Acoes</th>
+                    <th class="col-data">Pessoa</th>
+                    <th class="col-data">Descricao</th>
+                    <th class="col-data">Dt Vencimento</th>
+                    <th class="col-data">Dt Pagamento</th>
+                    <th class="col-valor-header">Valor</th>
+                    <th class="col-data">Acoes</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-lanc>
                 <tr>
                     <td>{{lanc.pessoa}}</td>
                     <td>{{lanc.descricao}}</td>
-                    <td><span>{{ lanc.dataVencimento }}</span></td>
-                    <td><span>{{ lanc.dataPagamento }}</span></td>
-                    <td><span [style.color]="lanc.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lanc.valor | number:'1.2-2' }}</span></td>
-                    <td>
-                        <a style="margin-right:2px" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
+                    <td class="col-data">{{ lanc.dataVencimento | date:'dd/MM/yyyy' }}</td>
+                    <td class="col-data">{{ lanc.dataPagamento | date:'dd/MM/yyyy' }}</td>
+                    <td class="col-valor" [style.color]="lanc.tipo === 'DESPESA' ? 'red' : 'blue'">
+                      {{ lanc.valor | number:'1.2-2' }}</td>
+                    <td class="col-acoes">
+                        <button class="btn-margin" pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
                         [routerLink]="['/lancamentos',lanc.codigo]"
-                        ></a>
-                        <button 
+                        ></button>
+                        <button class="btn-margin"
                             pButton icon="pi pi-trash" 
                             pTooltip="Excluir" 
                             tooltipPosition="top"
@@ -95,6 +95,12 @@
                         </button>
                     </td>
                 </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                  <td colspan="6">Nenhum Lançamento Encontrado</td>
+              </tr>
+
             </ng-template>
         </p-table>
       </div>

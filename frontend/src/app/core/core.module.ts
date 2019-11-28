@@ -4,7 +4,6 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { ConfirmationService } from 'primeng/components/common/api';
-registerLocaleData(localePt);
 import { CommonModule } from '@angular/common';
 
 import { ToastrModule } from 'ngx-toastr';
@@ -19,6 +18,8 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
 import { Title } from '@angular/platform-browser';
 import { PaginaNaoAutorizadaComponent } from './pagina-nao-autorizada/pagina-nao-autorizada.component';
 
+
+registerLocaleData(localePt);
 
 
 @NgModule({

@@ -34,15 +34,27 @@ label{
     }
 }
 
+.col-valor {
+    width: 120px;
+    text-align: right;
+  }
+
 .col-valor-header {
     width: 120px;
+    text-align: center;
 }
+
 .col-valor-content {
     text-align: right;
 }
 
+.col-data {
+    width: 130px;
+    text-align: center;
+}
+
 .col-data-header {
-    width: 120px;
+    width: 130px;
 }
 
 .col-data-content {
@@ -52,6 +64,15 @@ label{
 .col-acoes{
     width:90px;
     text-align: center;
-    
 }
+
+.col-acoes-header {
+    width: 90px;
+}
+
+.btn-margin{
+    margin: 5px;
+}
+
+
 

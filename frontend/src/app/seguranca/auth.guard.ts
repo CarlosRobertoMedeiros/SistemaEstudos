@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
      
-      //Esse if serve apenas no caso de não existir nenhum cookie de tolken
+      //Esse if serve apenas no caso de não existir nenhum cookie de token
       //redirecionando o usuário para a pagina de login
       //Lembre-se que podemos limpar os cookies
       if (this.auth.isAccessTokenValido()) {

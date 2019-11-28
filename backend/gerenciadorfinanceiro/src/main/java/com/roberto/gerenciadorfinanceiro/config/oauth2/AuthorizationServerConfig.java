@@ -34,8 +34,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .secret("$2a$10$dt6jhHj8LM3a9qQO77svK.MLd9wFeRlMcGHEc2iHYPTzlEhtb75wK") //angular
                 .scopes("read", "write")
                 .authorizedGrantTypes("password","refresh_token") // Atualização do token, falta colocar em um cookie seguro
-                /*.accessTokenValiditySeconds(5)
-                .refreshTokenValiditySeconds(10) //Para teste */
                 .accessTokenValiditySeconds(30) //30 segundos
                 .refreshTokenValiditySeconds(3600*24) // 1 Dia
             .and()
