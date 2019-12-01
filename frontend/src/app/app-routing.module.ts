@@ -6,6 +6,9 @@ import { PaginaNaoAutorizadaComponent } from './core/pagina-nao-autorizada/pagin
 
 
 const routes: Routes = [
+  {path:'lancamentos', loadChildren:'./lancamentos/lancamentos.module#LancamentosModule'},
+  {path:'pessoas', loadChildren:'./pessoas/pessoas.module#PessoasModule'},
+
   {path:'',redirectTo:'lancamentos', pathMatch:'full'},
   {path:'app-pagina-nao-autorizada',component:PaginaNaoAutorizadaComponent},
   {path:'pagina-nao-encontrada',component:PaginaNaoEncontradaComponent},

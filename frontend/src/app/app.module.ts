@@ -13,8 +13,6 @@ import { DicasInterpolacaoComponent } from './dicas-interpolacao/dicas-interpola
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 
-import { LancamentosModule } from './lancamentos/lancamentos.module';
-import { PessoasModule } from './pessoas/pessoas.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
 
 @NgModule({
@@ -31,8 +29,6 @@ import { SegurancaModule } from './seguranca/seguranca.module';
     FormsModule,
 
     CoreModule,
-    LancamentosModule,
-    PessoasModule,
     SegurancaModule,
     AppRoutingModule //Vai ter que usar depois de lancamento Módulo, rota sempre depois do módulo
 
