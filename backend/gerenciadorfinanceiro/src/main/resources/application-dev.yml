@@ -30,7 +30,7 @@ spring:
 
   jpa:
     database: mysql
-    #show-sql: true
+    show-sql: true
     generate-ddl: true
     hibernate:
       ddl-auto: update

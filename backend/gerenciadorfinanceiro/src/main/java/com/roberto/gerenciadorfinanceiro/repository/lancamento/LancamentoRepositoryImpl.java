@@ -1,7 +1,14 @@
 package com.roberto.gerenciadorfinanceiro.repository.lancamento;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.roberto.gerenciadorfinanceiro.dto.LancamentoEstatisticoCategoria;
+import com.roberto.gerenciadorfinanceiro.dto.LancamentoEstatisticoPorDia;
+import com.roberto.gerenciadorfinanceiro.filter.LancamentoFilter;
+import com.roberto.gerenciadorfinanceiro.model.LancamentoModel;
+import com.roberto.gerenciadorfinanceiro.repository.projection.ResumoLancamento;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,21 +17,74 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.apache.commons.lang3.StringUtils;
-
-import com.roberto.gerenciadorfinanceiro.model.LancamentoModel;
-import com.roberto.gerenciadorfinanceiro.filter.LancamentoFilter;
-import com.roberto.gerenciadorfinanceiro.repository.projection.ResumoLancamento;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
     @PersistenceContext
     private EntityManager manager;
+
+    @Override
+    public List<LancamentoEstatisticoPorDia> porDia(LocalDate mesReferencia) {
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+        CriteriaQuery<LancamentoEstatisticoPorDia> criteriaQuery = criteriaBuilder.createQuery(LancamentoEstatisticoPorDia.class); //Devolve Dados
+        Root<LancamentoModel> root = criteriaQuery.from(LancamentoModel.class);//Busca Dados
+
+        criteriaQuery.select(criteriaBuilder.construct(
+                LancamentoEstatisticoPorDia.class,
+                root.get("tipo"),
+                root.get("dataVencimento"),
+                criteriaBuilder.sum(root.get("valor"))));
+
+        LocalDate primeiroDiaDoMes = mesReferencia.withDayOfMonth(1);
+        LocalDate ultimoDiaDoMes = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
+
+        criteriaQuery.where(
+                criteriaBuilder.greaterThanOrEqualTo(root.get("dataVencimento"),primeiroDiaDoMes),
+                criteriaBuilder.lessThanOrEqualTo(root.get("dataVencimento"),ultimoDiaDoMes));
+
+        criteriaQuery.groupBy(root.get("tipo"),
+                              root.get("dataVencimento"));
+
+        TypedQuery<LancamentoEstatisticoPorDia> typedQuery = manager.createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
+
+
+    }
+
+    /**
+     * Pesquisa por mês de Referência entre o primeiro e ultimo dia
+     * Agrupado por categoria, usando criteria
+     * @param mesReferencia
+     * @return
+     */
+    @Override
+    public List<LancamentoEstatisticoCategoria> porCategoria(LocalDate mesReferencia) {
+
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+        CriteriaQuery<LancamentoEstatisticoCategoria> criteriaQuery = criteriaBuilder.createQuery(LancamentoEstatisticoCategoria.class); //Devolve Dados
+        Root<LancamentoModel> root = criteriaQuery.from(LancamentoModel.class);//Busca Dados
+
+        criteriaQuery.select(criteriaBuilder.construct(
+                LancamentoEstatisticoCategoria.class,
+                root.get("categoria"),criteriaBuilder.sum(root.get("valor"))));
+
+        LocalDate primeiroDiaDoMes = mesReferencia.withDayOfMonth(1);
+        LocalDate ultimoDiaDoMes = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
+
+        criteriaQuery.where(
+            criteriaBuilder.greaterThanOrEqualTo(root.get("dataVencimento"),primeiroDiaDoMes),
+            criteriaBuilder.lessThanOrEqualTo(root.get("dataVencimento"),ultimoDiaDoMes));
+
+        criteriaQuery.groupBy(root.get("categoria"));
+
+        TypedQuery<LancamentoEstatisticoCategoria> typedQuery = manager.createQuery(criteriaQuery);
+        return typedQuery.getResultList();
+    }
 
     @Override
     public Page<LancamentoModel> filtrar(LancamentoFilter lancamentoFilter, Pageable pageable) {

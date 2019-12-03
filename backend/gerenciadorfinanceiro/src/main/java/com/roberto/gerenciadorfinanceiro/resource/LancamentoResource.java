@@ -1,6 +1,8 @@
 package com.roberto.gerenciadorfinanceiro.resource;
 
 
+import com.roberto.gerenciadorfinanceiro.dto.LancamentoEstatisticoCategoria;
+import com.roberto.gerenciadorfinanceiro.dto.LancamentoEstatisticoPorDia;
 import com.roberto.gerenciadorfinanceiro.event.RecursoCriadoEvent;
 import com.roberto.gerenciadorfinanceiro.filter.LancamentoFilter;
 import com.roberto.gerenciadorfinanceiro.model.LancamentoModel;
@@ -17,6 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +36,18 @@ public class LancamentoResource {
 
     @Autowired
     private ApplicationEventPublisher publisher;
+
+    @GetMapping("/estatisticas/por-dia")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+    public List<LancamentoEstatisticoPorDia> porDia(){
+        return this.lancamentoRepository.porDia(LocalDate.now());
+    }
+
+    @GetMapping("/estatisticas/por-categoria")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+    public List<LancamentoEstatisticoCategoria> porCategoria(){
+        return this.lancamentoRepository.porCategoria(LocalDate.now());
+    }
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
