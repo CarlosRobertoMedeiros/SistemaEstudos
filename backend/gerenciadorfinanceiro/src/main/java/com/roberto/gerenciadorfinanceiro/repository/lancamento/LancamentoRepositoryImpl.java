@@ -1,6 +1,7 @@
 package com.roberto.gerenciadorfinanceiro.repository.lancamento;
 
 import com.roberto.gerenciadorfinanceiro.dto.LancamentoEstatisticoCategoria;
+import com.roberto.gerenciadorfinanceiro.dto.LancamentoEstatisticoPessoa;
 import com.roberto.gerenciadorfinanceiro.dto.LancamentoEstatisticoPorDia;
 import com.roberto.gerenciadorfinanceiro.filter.LancamentoFilter;
 import com.roberto.gerenciadorfinanceiro.model.LancamentoModel;
@@ -52,7 +53,31 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         TypedQuery<LancamentoEstatisticoPorDia> typedQuery = manager.createQuery(criteriaQuery);
 
         return typedQuery.getResultList();
+    }
 
+    @Override
+    public List<LancamentoEstatisticoPessoa> porPessoa(LocalDate inicio, LocalDate fim) {
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+        CriteriaQuery<LancamentoEstatisticoPessoa> criteriaQuery = criteriaBuilder.createQuery(LancamentoEstatisticoPessoa.class); //Devolve Dados
+        Root<LancamentoModel> root = criteriaQuery.from(LancamentoModel.class);//Busca Dados
+
+        criteriaQuery.select(criteriaBuilder.construct(
+                LancamentoEstatisticoPessoa.class,
+                root.get("tipo"),
+                root.get("pessoa"),
+                criteriaBuilder.sum(root.get("valor"))));
+
+
+        criteriaQuery.where(
+                criteriaBuilder.greaterThanOrEqualTo(root.get("dataVencimento"),inicio),
+                criteriaBuilder.lessThanOrEqualTo(root.get("dataVencimento"),fim));
+
+        criteriaQuery.groupBy(root.get("tipo"),
+                root.get("pessoa"));
+
+        TypedQuery<LancamentoEstatisticoPessoa> typedQuery = manager.createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
 
     }
 
