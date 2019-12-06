@@ -12,9 +12,12 @@ spring:
 
   gerenciadorfinanceiro:
     originPermitida: http://localhost:4200 #Referencia ao Angular
-
     seguranca: enable-https:false #front end a partir de 10:49
-
+    mail:
+      host:smtp.gmail.com
+      port:587
+      username:carlosmedeiroslima1981
+      password:carlosmedeiroslima1981
 
   devtools:
       restart:

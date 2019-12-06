@@ -12,6 +12,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -28,6 +29,12 @@ public class LancamentoService {
 
     @Autowired
     LancamentoRepository lancamentoRepository;
+
+    //@Scheduled(fixedDelay = 1000 * 2)
+    @Scheduled(cron = "0 11 06 * * *")
+    public void avisarSonreLancamentosVencidos(){
+        System.out.println(">>>>>> Método Sendo Executado <<<<<<<<");
+    }
 
     public byte[] relatorioPorPessoa(LocalDate inicio, LocalDate fim) throws Exception{
         List<LancamentoEstatisticoPessoa> dados = lancamentoRepository.porPessoa(inicio, fim);
