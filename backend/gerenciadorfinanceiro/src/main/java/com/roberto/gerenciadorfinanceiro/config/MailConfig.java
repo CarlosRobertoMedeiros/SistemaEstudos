@@ -17,8 +17,9 @@ public class MailConfig {
     @Autowired
     private GerenciadorFinanceiroApiProperty property;
 
-    @Bean
-    @Profile({"dev"})
+
+    //@Profile({"dev"})
+    /*@Bean
     public JavaMailSender javaMailSender(){
         Properties props = new Properties();
         props.put("mail.transport.protocol","smtp");
@@ -36,6 +37,6 @@ public class MailConfig {
 
         return mailSender;
 
-    }
+    }*/
 
 }

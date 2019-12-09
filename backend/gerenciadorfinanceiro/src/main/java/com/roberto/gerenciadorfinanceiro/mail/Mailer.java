@@ -16,9 +16,11 @@ import java.util.List;
 @Component
 public class Mailer {
 
+    /*
     @Autowired
     private JavaMailSender mailSender;
-
+    */
+    /*
     @EventListener
     private void teste(ApplicationReadyEvent event){
         this.enviarEmail("carlosmedeiroslima1981@gmail.com",
@@ -27,9 +29,9 @@ public class Mailer {
                 "Olá!<br/> Teste Funcionando !!");
         System.out.println("Terminado o envio de email");
     }
+    */
 
-
-
+    /*
     public void enviarEmail(String remetente,
                             List<String> destinatarios,
                             String assunto,
@@ -52,5 +54,7 @@ public class Mailer {
 
 
     }
+    */
+
 
 }
