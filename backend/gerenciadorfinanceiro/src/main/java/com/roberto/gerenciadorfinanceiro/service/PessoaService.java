@@ -30,8 +30,18 @@ public class PessoaService {
 
     public PessoaModel atualizar(long codigo, PessoaModel pessoa) {
         PessoaModel pessoaSalva = buscarPeloCodigo(codigo);
+
+        pessoaSalva.getContatos().clear();
+        pessoaSalva.getContatos().addAll(pessoa.getContatos());
+        pessoaSalva.getContatos().forEach(c -> c.setPessoa(pessoaSalva));
+
         //TODO: Tem que Implementar a consulta de pessoa e categoria antes da atualização
-        pessoa.setCodigo(pessoaSalva.getCodigo());
+        pessoaSalva.setCodigo(pessoaSalva.getCodigo());
+        return pessoaRepository.save(pessoaSalva);
+    }
+
+    public PessoaModel salvar(PessoaModel pessoa) {
+        pessoa.getContatos().forEach(c -> c.setPessoa(pessoa));
         return pessoaRepository.save(pessoa);
     }
 }

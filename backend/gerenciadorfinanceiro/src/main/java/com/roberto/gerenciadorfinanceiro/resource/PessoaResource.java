@@ -83,7 +83,7 @@ public class PessoaResource {
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
     public ResponseEntity<PessoaModel> criar(@RequestBody PessoaModel pessoa, HttpServletResponse resp){
-        PessoaModel pessoaSalva = pessoaRepository.save(pessoa);
+        PessoaModel pessoaSalva = pessoaService.salvar(pessoa);
 
         publisher.publishEvent(new RecursoCriadoEvent(this, resp, pessoaSalva.getCodigo()));
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);

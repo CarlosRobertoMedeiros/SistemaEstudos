@@ -24,7 +24,7 @@ public class PessoaModel {
 
     @JsonIgnoreProperties("pessoa")//Vai dar StackOverflow loop infinito entre pessoa e contato aqui eu desabilito
     @Valid
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ContatoModel> contatos;
 
     @Embedded

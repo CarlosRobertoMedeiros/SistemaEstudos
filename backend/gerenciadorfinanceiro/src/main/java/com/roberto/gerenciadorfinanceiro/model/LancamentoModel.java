@@ -2,6 +2,7 @@ package com.roberto.gerenciadorfinanceiro.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -43,6 +44,7 @@ public class LancamentoModel {
     @JoinColumn(name = "codigo_categoria")
     private CategoriaModel categoria;
 
+    @JsonIgnoreProperties("contatos") //Ignorei os contatos pois não tem necessidade de expor em lancamentos os contatos
     @NotNull
     @ManyToOne
     @JoinColumn(name = "codigo_pessoa")

@@ -9,6 +9,7 @@ import com.roberto.gerenciadorfinanceiro.model.LancamentoModel;
 import com.roberto.gerenciadorfinanceiro.repository.LancamentoRepository;
 import com.roberto.gerenciadorfinanceiro.repository.projection.ResumoLancamento;
 import com.roberto.gerenciadorfinanceiro.service.LancamentoService;
+import net.sf.jasperreports.engine.util.FileBufferedOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -20,8 +21,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +44,16 @@ public class LancamentoResource {
 
     @Autowired
     private ApplicationEventPublisher publisher;
+
+    @PostMapping("/anexo")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO') and #oauth2.hasScope('write')")
+    public String uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
+        OutputStream outputStream = new FileOutputStream("D:/"+anexo.getOriginalFilename());
+        outputStream.write(anexo.getBytes());
+        outputStream.close();
+        return "Ok";
+
+    }
 
     @GetMapping("/relatorios/por-pessoa")
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
