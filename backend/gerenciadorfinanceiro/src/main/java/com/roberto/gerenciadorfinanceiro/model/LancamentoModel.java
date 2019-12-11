@@ -50,6 +50,27 @@ public class LancamentoModel {
     @JoinColumn(name = "codigo_pessoa")
     private PessoaModel pessoa;
 
+    private String anexo;
+
+    @Transient
+    private String urlAnexo;
+
+
+    public String getAnexo() {
+        return anexo;
+    }
+
+    public void setAnexo(String anexo) {
+        this.anexo = anexo;
+    }
+
+    public String getUrlAnexo() {
+        return urlAnexo;
+    }
+
+    public void setUrlAnexo(String urlAnexo) {
+        this.urlAnexo = urlAnexo;
+    }
 
     public Long getCodigo() {
         return codigo;
