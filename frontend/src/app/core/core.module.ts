@@ -10,6 +10,9 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
 import { AuthService } from '../seguranca/auth.service';
+
+import { DashboardService } from './../dashboard/dashboard.service';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorHandlerService } from './error-handler.service';
 import { PessoaService } from '../pessoas/pessoa.service';
@@ -48,7 +51,7 @@ registerLocaleData(localePt);
     PessoaService,
     ErrorHandlerService,
     AuthService,
-    
+    DashboardService,
     ConfirmationService,
     Title,
     { provide: LOCALE_ID, useValue: 'pt' }
