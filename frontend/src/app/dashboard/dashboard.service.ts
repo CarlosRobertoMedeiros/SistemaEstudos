@@ -15,7 +15,7 @@ export class DashboardService {
   lancamentosUrl :string;
   
   constructor(private http: HttpClient ) { 
-    this.lancamentosUrl = `${environment.apiUrl}/api/lancamentos`
+    this.lancamentosUrl = `${environment.apiUrl}/api/lancamentos`;
   };
 
 
