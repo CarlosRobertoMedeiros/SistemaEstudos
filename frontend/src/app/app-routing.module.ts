@@ -9,6 +9,7 @@ const routes: Routes = [
   {path:'lancamentos', loadChildren:'./lancamentos/lancamentos.module#LancamentosModule'},
   {path:'pessoas', loadChildren:'./pessoas/pessoas.module#PessoasModule'},
   {path:'dashboard', loadChildren:'./dashboard/dashboard.module#DashboardModule'},
+  {path:'relatorios', loadChildren:'./relatorios/relatorios.module#RelatoriosModule'},
 
   {path:'',redirectTo:'dashboard', pathMatch:'full'},
   {path:'app-pagina-nao-autorizada',component:PaginaNaoAutorizadaComponent},
