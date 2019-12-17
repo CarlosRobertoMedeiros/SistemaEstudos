@@ -70,6 +70,13 @@ label{
     width: 90px;
 }
 
+.col-contato-header{
+    width:110px;
+}
+.col-contato-data{
+    width:110px;
+}
+
 .btn-margin{
     margin: 5px;
 }

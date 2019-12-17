@@ -12,6 +12,7 @@ import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdia
 import { AuthService } from '../seguranca/auth.service';
 
 import { DashboardService } from './../dashboard/dashboard.service';
+import { RelatoriosService } from '../relatorios/relatorios.service';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorHandlerService } from './error-handler.service';
@@ -52,6 +53,7 @@ registerLocaleData(localePt);
     ErrorHandlerService,
     AuthService,
     DashboardService,
+    RelatoriosService,
     ConfirmationService,
     Title,
     { provide: LOCALE_ID, useValue: 'pt' }
