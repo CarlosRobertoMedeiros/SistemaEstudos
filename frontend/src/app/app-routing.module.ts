@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
 import { PaginaNaoAutorizadaComponent } from './core/pagina-nao-autorizada/pagina-nao-autorizada.component';
+import { LoginFormComponent } from './seguranca/login-form/login-form.component';
 
 
 const routes: Routes = [

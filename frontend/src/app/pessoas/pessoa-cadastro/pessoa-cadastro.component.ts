@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 
 import { ToastrService } from 'ngx-toastr';
 
-import { Pessoa } from 'src/app/core/model';
+import { Pessoa, Contato } from 'src/app/core/model';
 import { PessoaService } from '../pessoa.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 
@@ -20,6 +20,8 @@ import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
+  exibindoFormularioContato = false;
+  contato:Contato;
 
   constructor(
     private pessoaService:PessoaService,
@@ -38,6 +40,23 @@ export class PessoaCadastroComponent implements OnInit {
       this.carregarPessoa(codigoPessoa);//Para Edição
     }
 
+  }
+
+  prepararNovoContato(){
+    this.exibindoFormularioContato=true;
+    this.contato = new Contato();
+  }
+
+  confirmarContato(frm:FormControl){
+    //Clonei o contato apenas para não dar erro nas validações
+    this.pessoa.contatos.push(this.clonarContato(this.contato));
+    this.exibindoFormularioContato=false;
+    
+    frm.reset();
+  }
+
+  clonarContato(contato:Contato):Contato{
+    return new Contato(contato.codigo, contato.nome, contato.email, contato.telefone);
   }
 
   get editando(){

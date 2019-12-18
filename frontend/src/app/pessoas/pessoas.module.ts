@@ -14,6 +14,7 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 
 import { PanelModule } from 'primeng/components/panel/panel';
+import { DialogModule } from 'primeng/components/dialog/dialog';
 
 import { SharedModule } from '../shared/shared.module';
 import { PessoasRoutingModule } from './pessoas-routing.module';
@@ -34,6 +35,7 @@ import { PessoasRoutingModule } from './pessoas-routing.module';
     InputTextareaModule,
     ButtonModule,
     PanelModule,
+    DialogModule,
 
     SharedModule,
     PessoasRoutingModule
