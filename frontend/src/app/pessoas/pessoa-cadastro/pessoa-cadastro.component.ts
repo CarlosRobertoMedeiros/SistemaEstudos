@@ -1,14 +1,13 @@
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 
 import { ToastrService } from 'ngx-toastr';
 
-import { Pessoa, Contato } from 'src/app/core/model';
-import { PessoaService } from '../pessoa.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-
+import { PessoaService } from '../pessoa.service';
+import { Pessoa, Contato } from 'src/app/core/model';
 
 
 
@@ -20,9 +19,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
-  exibindoFormularioContato = false;
-  contato:Contato;
-
+  
   constructor(
     private pessoaService:PessoaService,
     private toasty:ToastrService,
@@ -41,29 +38,10 @@ export class PessoaCadastroComponent implements OnInit {
     }
 
   }
-
-  prepararNovoContato(){
-    this.exibindoFormularioContato=true;
-    this.contato = new Contato();
-  }
-
-  confirmarContato(frm:FormControl){
-    //Clonei o contato apenas para não dar erro nas validações
-    this.pessoa.contatos.push(this.clonarContato(this.contato));
-    this.exibindoFormularioContato=false;
-    
-    frm.reset();
-  }
-
-  clonarContato(contato:Contato):Contato{
-    return new Contato(contato.codigo, contato.nome, contato.email, contato.telefone);
-  }
-
   get editando(){
     return Boolean(this.pessoa.codigo); //Existindo Código está editando
   }
-
-  
+ 
   atualizarPessoa(form:FormControl){
     this.pessoaService.atualizar(this.pessoa)
       .then(pessoa =>{
