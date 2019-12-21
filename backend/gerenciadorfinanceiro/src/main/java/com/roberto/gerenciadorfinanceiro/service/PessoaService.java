@@ -2,6 +2,7 @@ package com.roberto.gerenciadorfinanceiro.service;
 
 import com.roberto.gerenciadorfinanceiro.model.PessoaModel;
 import com.roberto.gerenciadorfinanceiro.repository.PessoaRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,8 @@ public class PessoaService {
         pessoaSalva.getContatos().forEach(c -> c.setPessoa(pessoaSalva));
 
         //TODO: Tem que Implementar a consulta de pessoa e categoria antes da atualização
-        pessoaSalva.setCodigo(pessoaSalva.getCodigo());
+        //pessoaSalva.setCodigo(pessoaSalva.getCodigo());
+        BeanUtils.copyProperties(pessoa,pessoaSalva,"codigo","contatos");
         return pessoaRepository.save(pessoaSalva);
     }
 

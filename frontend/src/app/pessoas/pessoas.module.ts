@@ -15,6 +15,7 @@ import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.co
 
 import { PanelModule } from 'primeng/components/panel/panel';
 import { DialogModule } from 'primeng/components/dialog/dialog';
+import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 
 import { SharedModule } from '../shared/shared.module';
 import { PessoasRoutingModule } from './pessoas-routing.module';
@@ -38,6 +39,7 @@ import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa
     ButtonModule,
     PanelModule,
     DialogModule,
+    DropdownModule,
 
     SharedModule,
     PessoasRoutingModule
