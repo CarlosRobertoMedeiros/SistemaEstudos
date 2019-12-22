@@ -115,31 +115,34 @@
             <p-dropdown placeholder="Selecione..." 
                 [filter]="true" [options]="estados"
                 [(ngModel)]="estadoSelecionado" 
-                name="estadoSelecionado" (onChange)="carregarCidades()">
+                name="estadoSelecionado" (onChange)="carregarCidades()"
+                #estado="ngModel" required>
+
+                <app-message 
+                    [control]="estado" 
+                    error="required"
+                    text="Informe o estado">
+                </app-message>
+
             </p-dropdown>
 
-            <!--Div de Validação de Campo-->
-            <!--
-            <app-message 
-                [control]="estado" 
-                error="required"
-                text="Informe o estado">
-            </app-message>
-
-            <app-message 
-                [control]="estado" 
-                error="minlength"
-                text="Mínimo de {{estado.errors?.minlength?.requiredLength}} caracteres ">
-            </app-message>
-            -->
-            <!--Fim da Div de Validação de Campo-->
-
+           
         </div><!--Fim do Estado-->
 
         <div class="ui-g-12 ui-md-6 ui-fluid"><!--Cidade-->
             <label>Cidade</label>
             <p-dropdown placeholder="Selecione..." 
-                [filter]="true" [options]="cidades">
+                [filter]="true" [options]="cidades"
+                [(ngModel)]="pessoa.endereco.cidade.codigo" 
+                name="cidade" #cidade="ngModel" required
+                [disabled]="!estadoSelecionado">
+
+                <app-message 
+                    [control]="cidade" 
+                    error="required"
+                    text="Informe a cidade">
+                </app-message>
+
             </p-dropdown>
 
             <!--Div de Validação de Campo-->

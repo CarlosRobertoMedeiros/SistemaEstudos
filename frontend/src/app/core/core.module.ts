@@ -4,11 +4,11 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { ConfirmationService } from 'primeng/components/common/api';
+import { MessageService } from 'primeng/components/common/messageservice'
 import { CommonModule } from '@angular/common';
 
-import { ToastrModule } from 'ngx-toastr';
-
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
+import { GrowlModule } from 'primeng/components/growl/growl';
 import { AuthService } from '../seguranca/auth.service';
 
 import { DashboardService } from './../dashboard/dashboard.service';
@@ -37,13 +37,13 @@ registerLocaleData(localePt);
     CommonModule,
     RouterModule,
     
-    ToastrModule.forRoot(), // ToastrModule added
+    GrowlModule,
     ConfirmDialogModule
-
   ],
 
   exports : [
     NavbarComponent,
+    GrowlModule,
     ConfirmDialogModule
   ],
 
@@ -55,6 +55,7 @@ registerLocaleData(localePt);
     DashboardService,
     RelatoriosService,
     ConfirmationService,
+    MessageService,
     Title,
     { provide: LOCALE_ID, useValue: 'pt' }
   ]

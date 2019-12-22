@@ -76,7 +76,12 @@ export class PessoaService {
 
     let headers = new HttpHeaders().append('Content-Type','application/json');
 
+      /*
       return this.http.post(this.pessoasUrl,JSON.stringify(pessoa), {headers})
+        .toPromise()
+        .then();
+      */
+     return this.http.post<Pessoa>(this.pessoasUrl,pessoa, {headers})
         .toPromise()
         .then();
   }
@@ -91,7 +96,12 @@ export class PessoaService {
     
     let headers = new HttpHeaders().append('Content-Type','application/json');
 
+      /*
       return this.http.put(`${this.pessoasUrl}/${pessoa.codigo}`,JSON.stringify(pessoa),{headers})
+        .toPromise()
+        .then();
+      */
+      return this.http.put<Pessoa>(`${this.pessoasUrl}/${pessoa.codigo}`,pessoa,{headers})
         .toPromise()
         .then();
   }

@@ -11,6 +11,7 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { FormsModule } from '@angular/forms';
 import { MoneyHttpInterceptor } from './money-http-interceptor';
 import { AuthGuard } from './auth.guard';
+import { environment } from 'src/environments/environment';
 
 export function tokenGetter(): string {
   return localStorage.getItem("token");
@@ -33,6 +34,8 @@ export function tokenGetter(): string {
         tokenGetter: tokenGetter,
         whitelistedDomains: ['localhost:9000'],
         blacklistedRoutes: ['http://localhost:9000/oauth/token']
+        //whitelistedDomains : environment.whitelistedDomains,
+        //blacklistedRoutes:environment.blacklistedRoutes
       }
   })
 

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/api';
 
 import { stringify } from '@angular/compiler/src/util';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { AuthService } from 'src/app/seguranca/auth.service';
 
 import { LancamentoService, LancamentoFiltro } from '../lancamento.service';
@@ -26,7 +26,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   constructor(private lancamentoService:LancamentoService,
               private auth:AuthService,
               private errorHandler:ErrorHandlerService,
-              private toasty:ToastrService,
+              private messageService:MessageService,
               private confirmation:ConfirmationService,
               private title:Title){}
 
@@ -65,7 +65,7 @@ export class LancamentosPesquisaComponent implements OnInit {
     this.lancamentoService.excluir(lancamento.codigo)
       .then(()=>{
         this.grid.reset();
-        this.toasty.success('Lançamento Excluido com Sucesso !!');
+        this.messageService.add({severity:'success' , detail : 'Lançamento Excluido com Sucesso !!'});
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

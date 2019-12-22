@@ -114,7 +114,7 @@ public class LancamentoResource {
     }
 
     @DeleteMapping("{codigo}")
-    @PreAuthorize("hasAuthority('RROLE_REMOVER_LANCAMENTO') and #oauth2.hasScope('write')")
+    @PreAuthorize("hasAuthority('ROLE_REMOVER_LANCAMENTO') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long codigo) {
         lancamentoRepository.deleteById(codigo);

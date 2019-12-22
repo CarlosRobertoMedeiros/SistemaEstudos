@@ -54,7 +54,7 @@ public class LancamentoService {
     public LancamentoModel salvar(@Valid LancamentoModel lancamentoModel) {
         PessoaModel pessoaModel = pessoaRepository.findById(lancamentoModel.getPessoa().getCodigo()).get();
 
-        if(pessoaModel==null /*|| !pessoaModel.isAtivo()*/){
+        if(pessoaModel==null){
             throw new PessoaInexistenteOuInativaException();
         }
 

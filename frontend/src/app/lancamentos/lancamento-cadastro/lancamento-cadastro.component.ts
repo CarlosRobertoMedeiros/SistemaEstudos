@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
-import { ToastrService, ToastrComponentlessModule } from 'ngx-toastr';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 import { CategoriaService } from 'src/app/categoria/categoria.service';
 import { PessoaService } from 'src/app/pessoas/pessoa.service';
@@ -36,7 +36,7 @@ export class LancamentoCadastroComponent implements OnInit {
   constructor(private categoriaService:CategoriaService,
               private pessoaService:PessoaService,
               private lancamentoService:LancamentoService,
-              private toasty:ToastrService,
+              private messageService:MessageService,
               private errorHandler:ErrorHandlerService,
               private route:ActivatedRoute,
               private router:Router,
@@ -117,7 +117,7 @@ export class LancamentoCadastroComponent implements OnInit {
         //this.lancamento = lancamento;
         this.formulario.patchValue(lancamento);
         this.atualizarTituloEdicao();
-        this.toasty.success('Lançamento Alterado com Sucesso !');
+        this.messageService.add({severity:'success', detail: 'Lançamento Alterado com Sucesso !'});  
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -125,7 +125,7 @@ export class LancamentoCadastroComponent implements OnInit {
   adicionarLancamento(){
     return this.lancamentoService.adicionar(this.formulario.value)
       .then((lancamentoAdicionado)=>{
-          this.toasty.success('Lançamento Adicionado com Sucesso !');  
+          this.messageService.add({severity:'success', detail: 'Lançamento Adicionado com Sucesso !'});  
           this.router.navigate(['/lancamentos',lancamentoAdicionado.codigo]);
           //console.log("url =>"+this.lancamentoService.lancamentosUrl+"lancAdicionado"+lancamentoAdicionado.codigo);
           //his.router.navigate([this.lancamentoService.lancamentosUrl,lancamentoAdicionado.codigo]);

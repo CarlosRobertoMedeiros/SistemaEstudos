@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { PessoaService } from '../pessoa.service';
@@ -25,7 +25,7 @@ export class PessoaCadastroComponent implements OnInit {
   
   constructor(
     private pessoaService:PessoaService,
-    private toasty:ToastrService,
+    private messageService:MessageService,
     private errorHandler:ErrorHandlerService,
     private route:ActivatedRoute,
     private router:Router,
@@ -69,7 +69,7 @@ export class PessoaCadastroComponent implements OnInit {
       .then(pessoa =>{
         this.pessoa = pessoa;
         this.atualizarTituloEdicao();
-        this.toasty.success('Pessoa Alterado com Sucesso !');
+        this.messageService.add({severity:'success', detail: 'Pessoa Alterado com Sucesso !'});
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -78,7 +78,7 @@ export class PessoaCadastroComponent implements OnInit {
     return this.pessoaService.adicionar(this.pessoa)
     .then(pessoaAdicionada=>{
         form.reset();
-        this.toasty.success('Pessoa Adicionada com Sucesso !');
+        this.messageService.add({severity:'success', detail: 'Pessoa Adicionada com Sucesso !'});
         this.router.navigate(['/pessoas',pessoaAdicionada.codigo]);
         this.pessoa = new Pessoa();
     })
@@ -99,6 +99,15 @@ export class PessoaCadastroComponent implements OnInit {
       return this.pessoaService.buscarPorCodigo(codigo)
       .then(pessoa => {
           this.pessoa = pessoa; 
+
+          this.estadoSelecionado = (this.pessoa.endereco.cidade) ? 
+              this.pessoa.endereco.cidade.estado.codigo : null;
+          
+          if (this.estadoSelecionado){
+            this.carregarCidades();
+          }
+
+
           this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));

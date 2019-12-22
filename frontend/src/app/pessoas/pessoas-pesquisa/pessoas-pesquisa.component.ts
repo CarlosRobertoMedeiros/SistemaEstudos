@@ -3,7 +3,7 @@ import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/ap
 
 import { PessoaService, PessoaFiltro } from '../pessoa.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -20,7 +20,7 @@ export class PessoasPesquisaComponent implements OnInit {
   
   constructor(private pessoaService:PessoaService,
               private errorHandler:ErrorHandlerService,
-              private toasty:ToastrService,
+              private messageService:MessageService,
               private confirmation:ConfirmationService,
               private title:Title){};
 
@@ -60,7 +60,7 @@ export class PessoasPesquisaComponent implements OnInit {
     this.pessoaService.excluir(pessoa.codigo)
       .then(()=>{
         this.grid.reset();
-        this.toasty.success("Pessoa Excluida com Sucesso !!");
+        this.messageService.add({severity:'success', detail: 'Pessoa Excluida com Sucesso !!'});
       })
       .catch(erro => this.errorHandler.handle(erro));
 
@@ -73,7 +73,7 @@ export class PessoasPesquisaComponent implements OnInit {
     this.pessoaService.mudarStatus(pessoa.codigo,novoStatus)
       .then(()=>{
         pessoa.ativo = novoStatus;
-        this.toasty.success(`O Status de ${pessoa.nome} foi alterado para ${novoStatus===false?"Inativo":"Ativo"}`);
+        this.messageService.add({ severity:'success',detail:'`O Status de ${pessoa.nome} foi alterado para ${novoStatus===false?"Inativo":"Ativo"}`'});
       })
       .catch(erro => this.errorHandler.handle(erro));
 

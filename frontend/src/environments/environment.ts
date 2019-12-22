@@ -4,8 +4,15 @@
 
 export const environment = {
   production: false,
-  apiUrl:'http://localhost:9000'
+  apiUrl:'http://localhost:9000',
+
+  whitelistedDomains: [/localhost:9000/],
+  blacklistedRoutes: [/\/oauth\/token/]
+
+
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file
